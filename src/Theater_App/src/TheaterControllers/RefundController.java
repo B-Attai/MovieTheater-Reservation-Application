@@ -10,6 +10,7 @@ public class RefundController {
 		view.addRequestListener(e ->{
 			System.out.println("Print Receipt pressed - This is lcoated in Refund Controller!!");
 			
+			// There are getters in the class! Every thing is set
 			// Change the type as needed I just used string as illustration
 //			String username, ticketid, movie, showtime, cost,date;
 //			

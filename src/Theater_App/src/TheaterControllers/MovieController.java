@@ -12,7 +12,7 @@ public class MovieController {
 	public MovieController(Movie_UI mainwindow, Ticket_UI ticketwindow) {
 		view = mainwindow;
 		nextview = ticketwindow;
-		
+		// ---------------------------------- First View -----------------------------------------------//
 		// If Search is press (from first view)
 		/*
 		 * 1. Get movie name 
@@ -38,6 +38,7 @@ public class MovieController {
 			
 		});
 		
+		// ---------------------------------- 2nd View -----------------------------------------------//
 		// If Confirm Selection From first page is clicked
 		view.addConfirmSelectionListener(e ->{
 
@@ -62,6 +63,7 @@ public class MovieController {
 
 		});
 		
+		// ---------------------------------- 3rd View -----------------------------------------------//
 		// if Confirm showtime from 2nd page is clicked
 		view.addShowtimeListener(e ->{
 
@@ -91,6 +93,7 @@ public class MovieController {
 		});
 		
 		view.addShowAvailableSeatListener(e ->{
+			// We can't print a 2d array to jframe, need to create a graphic, this button would pop up the grpahic!
 			System.out.println("Graphic for seats should be POPPING UP pressed");
 			
 			//int[] rows = arrayList.toArray(movie or showtime.getRowSeats()]);
@@ -103,7 +106,7 @@ public class MovieController {
 
 		});
 		
-		
+		// ---------------------------------- final viewView -----------------------------------------------//
 		// if Confirm Seat from 3page is clicked
 		view.addConfirmSeatListener(e ->{
 			// Getting selection
