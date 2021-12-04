@@ -1,9 +1,11 @@
+package App;
+
 import Controller.*;
 import Model.*;
 
 import java.util.Scanner;
 
-public class App {
+public class BackEndApp {
 
     //Test methods to Command Line to check functionality
     public static void main(String[] args) {
