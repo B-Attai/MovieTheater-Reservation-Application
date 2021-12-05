@@ -37,7 +37,7 @@ public class LoginController {
 			}
 			
 			// Prompt News
-			JOptionPane.showMessageDialog(null,"Movie Update: Spiderman No Way Home in Theaters on December 17th!!", "Latest News for Registered User!",JOptionPane.PLAIN_MESSAGE);
+//			JOptionPane.showMessageDialog(null,"Movie Update: Spiderman No Way Home in Theaters on December 17th!!", "Latest News for Registered User!",JOptionPane.PLAIN_MESSAGE);
 			
 			// Removing the view
 			loginView.setVisible(false);
@@ -70,8 +70,6 @@ public class LoginController {
 
 	private User checkUser(User user){
 		for (User u: usersDB){
-//			System.out.println(user);
-//			System.out.println(u);
 			if (u.equals(user)){
 				return u;
 			}

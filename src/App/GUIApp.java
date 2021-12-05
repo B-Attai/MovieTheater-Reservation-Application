@@ -1,16 +1,11 @@
 package App;
 
-import Model.Movie;
-import Model.RegisteredUser;
-import Model.User;
 import TheaterControllers.*;
 import TheaterView.Login_UI;
 import TheaterView.Menu_UI;
 import TheaterView.Movie_UI;
 import TheaterView.Ticket_UI;
 import dataBase.DataBase;
-
-import java.util.ArrayList;
 
 public class GUIApp {
 	
@@ -35,14 +30,9 @@ public class GUIApp {
 
 		
 		// Creating Controllers (NOTE BACKEND PEOPLE NEED TO PASS IN MODEL AS WELL, FOR NOW JUST PASSING IN UI to TEST UI LOGIC)
-		ArrayList<User> userList = new ArrayList<User>();
-		userList.add(new RegisteredUser("Amir", "123", "123", "123"));
-		LoginController logincontroller = new LoginController(loginWindow, menuWindow, userList);
+		LoginController logincontroller = new LoginController(loginWindow, menuWindow, theaterDatabase.getUsers());
 
-
-		ArrayList<User> movieList = new ArrayList<Movie>();
-		movieList.add(new Movie());
-		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow);
+		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow, theaterDatabase.getMovies());
 
 
 		MenuController menucontroller = new MenuController(loginWindow, menuWindow, movieWindow, ticketWindow);

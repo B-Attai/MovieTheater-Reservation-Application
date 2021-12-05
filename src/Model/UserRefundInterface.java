@@ -2,5 +2,5 @@ package Model;
 
 public interface UserRefundInterface {
 
-    public double refund(double amount);
+    double refund(double amount);
 }

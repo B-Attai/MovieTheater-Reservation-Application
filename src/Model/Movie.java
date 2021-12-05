@@ -2,11 +2,12 @@ package Model;
 
 public class Movie {
 
+    private String movieName;
     private String movieInfo;
 
     //Test Constructor
     public Movie(String movieName) {
-        setMovieInfo(movieName);
+        setMovieName(movieName);
     }
 
 
@@ -18,9 +19,17 @@ public class Movie {
         this.movieInfo = movieInfo;
     }
 
+    public String getMovieName(){
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
     @Override
     public String toString() {
-        return movieInfo;
+        return movieName;
 
     }
 }

@@ -1,35 +1,11 @@
 package TheaterView;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Panel;
-import java.awt.Dimension;
-import javax.swing.JSeparator;
-import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JList;
-import java.awt.Button;
-import javax.swing.JTextField;
-import javax.swing.JLayeredPane;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
-import javax.swing.ListSelectionModel;
+import java.awt.event.ActionListener;
 
 public class Movie_UI extends JFrame {
 
@@ -50,6 +26,8 @@ public class Movie_UI extends JFrame {
 	public JPanel buyPanel;
 	public JTextArea ConfirmationSummaryTextArea;
 	public JButton buyButton;
+
+//	JPanel moviePanel;
 	/**
 	 * Launch the application.
 	 */
@@ -82,6 +60,7 @@ public class Movie_UI extends JFrame {
 		layeredPanel.setBounds(15, 11, 440, 326);
 		contentPane.add(layeredPanel);
 		
+//		moviePanel = new JPanel();
 		JPanel moviePanel = new JPanel();
 		moviePanel.setVerifyInputWhenFocusTarget(false);
 		moviePanel.setVisible(false);
@@ -120,6 +99,7 @@ public class Movie_UI extends JFrame {
 		movielist = new JList();
 		movielist.setBounds(88, 130, 262, 109);
 		moviePanel.add(movielist);
+
 		
 		showtimePanel = new JPanel();
 
@@ -312,6 +292,10 @@ public class Movie_UI extends JFrame {
 
 	
 	
-	
+//	public void setMoviesView(ArrayList<Movie> movies){
+//		movielist =new JList(movies.toArray());
+//		movielist.setBounds(88, 130, 262, 109);
+//		moviePanel.add(movielist);
+//	}
 	
 }

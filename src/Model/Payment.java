@@ -40,8 +40,7 @@ public class Payment{
 
     // Version Amir
     public Ticket generateTicket(Theater theater, Movie movie, User user, int showroomNumber, int seatNumber){
-
-
+//        Checking the logic of theater occupancy
 
         Ticket aTicket = new Ticket(theater, movie, user, showroomNumber, seatNumber);
         ticketDB.add(aTicket);
@@ -67,9 +66,9 @@ public class Payment{
                 ticket.getTheater().removeABooking(bookingReference);
 
                 if (ticket.getUser().getUserType().equals("Registered")) {
-                    setRefundStrategy(new RegularUserRefund());
-                } else {
                     setRefundStrategy(new RegisterUserRefund());
+                } else {
+                    setRefundStrategy(new RegularUserRefund());
                 }
                 refundStrategy.refund(amount);
                 return;

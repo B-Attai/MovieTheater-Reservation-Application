@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class DataBase {
 
-    private ArrayList<Movie> movies;
-    private Theater theater;
-    private ArrayList<User> users;
+    private final ArrayList<Movie> movies;
+    private final Theater theater;
+    private final ArrayList<User> users;
 
     public DataBase(){
         this.movies = loadFromMovieDB();
@@ -62,7 +62,20 @@ public class DataBase {
     public static ArrayList<User> loadUserDB(){
         ArrayList<User> users = new ArrayList<User>();
 
-//        users.
+        users.add(new RegisteredUser("Amir", "123", "123", "123"));
+        users.add(new RegisteredUser("1", "1", "123", "123"));
+        return users;
+    }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
+
+    public Theater getTheater() {
+        return theater;
+    }
+
+    public ArrayList<User> getUsers() {
         return users;
     }
 }

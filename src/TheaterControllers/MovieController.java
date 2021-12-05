@@ -4,6 +4,7 @@ import Model.Movie;
 import TheaterView.Movie_UI;
 import TheaterView.Ticket_UI;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class MovieController {
@@ -28,8 +29,10 @@ public class MovieController {
 			System.out.println("Search Movie pressed");
 			// Get 2 arguments Username, Passwowrd
 			String movie = view.getMovienameInput();
+			System.out.println(movie);
 			
 			// Backend logic stuffs.
+
 			// Create SQL Query or pass movie name to movie. Get a list of possible movies
 			
 			//1. Update Jlist for displaying movies:
@@ -37,8 +40,10 @@ public class MovieController {
 			//2. update this list from query/movie class/model
 			
 			//3. Set Jlist i.e.:
-			// view.movielist = new JList (movies.toArray());
-			
+			view.movielist = new JList(findMovies(movie).toArray());
+//			view.setMoviesView(findMovies(movie));
+
+
 		});
 		
 		// ---------------------------------- 2nd View -----------------------------------------------//
@@ -51,7 +56,7 @@ public class MovieController {
 			
 			// Not sure how complex we want this but I think ideally we just showcase 1 movie from the selection
 			// and we just do nothing here.
-			// String SelectedMovie = view.getMovieSelection(); // Returning a string, but could return selected list OR element easy change instead...
+			 String SelectedMovie = view.getMovieSelection(); // Returning a string, but could return selected list OR element easy change instead...
 
 			// Set Showtime from backend (once we get confirm movie)
 			// ArrayList<showtime> showtimelist = moviemodel.getshowtimes(SelectedMovie);
@@ -149,10 +154,17 @@ public class MovieController {
 
 
 		});
+	}
 
-		
-		
-		
+	private ArrayList<Movie> findMovies(String  movie){
+		ArrayList<Movie> movies = new ArrayList<>();
+		for (Movie m:movieDB){
+			if (m.getMovieName().equals(movie)){
+				System.out.println(m);
+				movies.add(m);
+			}
+		}
+		return movies;
 	}
 
 }
