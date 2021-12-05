@@ -1,67 +1,89 @@
 package Model;
 
+import java.util.Objects;
+
 public class Ticket {
 
-    private String theaterName;
-    private String userInfo;
-    private String bookingReference;
-    private String movie;
-    private String dateTime;
+    private static int referenceNumber = 0;
+
+    private final User user;
+    private final int bookingReference;
+    private final Movie movie;
+    private final String dateTime;
+    private final Theater theater;
+    private final int showroomNumber;
+    private final int seatNumber;
 
     //Constructor
-    public Ticket(String userInfo, String theaterName, String bookingReference, String bookingInfo) {
-        this.userInfo = userInfo;
-        this.theaterName = theaterName;
-        this.bookingReference = bookingReference;
-        this.movie = bookingInfo;
+    public Ticket(Theater theater, Movie movie, User user, int showroomNumber, int seatNumber) {
+        this.theater = theater;
+        this.movie = movie;
+        this.user = user;
+        this.showroomNumber = showroomNumber;
+        this.seatNumber = seatNumber;
+
         //Get current date and time
         this.dateTime = new DateTime().getCurrentDateTime();
+        this.bookingReference = generateReferenceNumber();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return bookingReference == ticket.bookingReference;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookingReference);
     }
 
     //Overridden toString, can be modified to get the required format
+
     @Override
     public String toString() {
         return "Ticket{" +
-                "theaterName='" + theaterName + '\'' +
-                ", userInfo='" + userInfo + '\'' +
-                ", bookingReference='" + bookingReference + '\'' +
-                ", movie='" + movie + '\'' +
+                "user=" + user.getUserName() +
+                ", bookingReference=" + bookingReference +
+                ", movie=" + movie.getMovieInfo() +
                 ", dateTime='" + dateTime + '\'' +
+                ", theater=" + theater.getTheaterName() +
+                ", showroomNumber=" + showroomNumber +
+                ", seatNumber=" + seatNumber +
                 '}';
     }
 
+
 //Getters and Setters
 
-    public String getTheaterName() {
-        return theaterName;
+    private static int generateReferenceNumber() {
+        return ++referenceNumber;
     }
 
-    public void setTheaterName(String theaterName) {
-        this.theaterName = theaterName;
+    public User getUser() {
+        return user;
     }
 
-    public String getUserInfo() {
-        return userInfo;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setUserInfo(String userInfo) {
-        this.userInfo = userInfo;
+    public int getShowroomNumber() {
+        return showroomNumber;
     }
 
-    public String getBookingReference() {
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public int getBookingReference() {
         return bookingReference;
     }
 
-    public void setBookingReference(String ticketInfo) {
-        this.bookingReference = ticketInfo;
-    }
-
-    public String getMovie() {
+    public Movie getMovie() {
         return movie;
-    }
-
-    public void setMovie(String movie) {
-        this.movie = movie;
     }
 
     public String getDateTime() {

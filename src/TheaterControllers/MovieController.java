@@ -1,17 +1,20 @@
 package TheaterControllers;
 
-import javax.swing.JOptionPane;
-
+import Model.Movie;
 import TheaterView.Movie_UI;
 import TheaterView.Ticket_UI;
+
+import java.util.ArrayList;
 
 public class MovieController {
 	private Movie_UI view;
 	private Ticket_UI nextview;
+	private ArrayList<Movie> movieDB;
 	
-	public MovieController(Movie_UI mainwindow, Ticket_UI ticketwindow) {
-		view = mainwindow;
-		nextview = ticketwindow;
+	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB) {
+		view = mainWindow;
+		nextview = ticketWindow;
+		this.movieDB = movieDB;
 		// ---------------------------------- First View -----------------------------------------------//
 		// If Search is press (from first view)
 		/*

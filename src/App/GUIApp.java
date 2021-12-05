@@ -1,10 +1,22 @@
 package App;
+
+import Model.Movie;
+import Model.RegisteredUser;
+import Model.User;
 import TheaterControllers.*;
-import TheaterView.*;
+import TheaterView.Login_UI;
+import TheaterView.Menu_UI;
+import TheaterView.Movie_UI;
+import TheaterView.Ticket_UI;
+import dataBase.DataBase;
+
+import java.util.ArrayList;
 
 public class GUIApp {
 	
 	public static void main(String[] args) {
+
+		DataBase theaterDatabase = new DataBase();
 				
 		// Creating UI's
 		Login_UI loginWindow = new Login_UI();
@@ -18,13 +30,21 @@ public class GUIApp {
 		
 		Menu_UI menuWindow = new Menu_UI();
 		menuWindow.setVisible(false);
-		
-		// Creating Models
-		
+
+
+
 		
 		// Creating Controllers (NOTE BACKEND PEOPLE NEED TO PASS IN MODEL AS WELL, FOR NOW JUST PASSING IN UI to TEST UI LOGIC)
-		LoginController logincontroller = new LoginController(loginWindow, menuWindow);
+		ArrayList<User> userList = new ArrayList<User>();
+		userList.add(new RegisteredUser("Amir", "123", "123", "123"));
+		LoginController logincontroller = new LoginController(loginWindow, menuWindow, userList);
+
+
+		ArrayList<User> movieList = new ArrayList<Movie>();
+		movieList.add(new Movie());
 		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow);
+
+
 		MenuController menucontroller = new MenuController(loginWindow, menuWindow, movieWindow, ticketWindow);
 		RefundController refundcontroller = new RefundController(ticketWindow);
 		TicketController ticketcontroller = new TicketController(ticketWindow);

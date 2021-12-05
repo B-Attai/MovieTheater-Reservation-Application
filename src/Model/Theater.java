@@ -4,36 +4,33 @@ package Model;
  * NOTE Theater is currently a SINGLETON.
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Theater {
 
     private String theaterName = "Calgary Theater";
-    private List<Movie> movieList; //Loaded from DB
-    private List<Showroom> showroomList; //Loaded from DB
+    private ArrayList<Movie> movieList; //Loaded from DB
+    private ArrayList<Showroom> showroomList; //Loaded from DB
     private Map<Movie, Showroom> showtimes; //Mapping of Movie to Showroom(show-time) entities
     private Map<String, Map<Movie, Booking>> bookings; //Mapping of Booking reference number to Movie and Booking
     private Movie movie;
     private String ticketInfo;
 
     //Singleton
-    private static Theater theater_instance = null;
+//    private static Theater theater_instance = null;
 
     //Singleton getInstance()
-    public static Theater getInstance(){
-        if (theater_instance == null)
-            theater_instance = new Theater();
-
-        return theater_instance;
-    }
+//    public static Theater getInstance(){
+//        if (theater_instance == null)
+//            theater_instance = new Theater(new ArrayList<Movie>(), new ArrayList<Showroom>());
+//
+//        return theater_instance;
+//    }
 
     //Theater is a private constructor, cannot be instantiated externally
-    private Theater(){
-        this.movieList = loadFromMovieDB();
-        this.showroomList = loadFromShowroomDB();
+    public Theater(ArrayList<Movie> movieList, ArrayList<Showroom> showroomList){
+        this.movieList = movieList;
+        this.showroomList = showroomList;
 
         //Map for bookings and booking id.
         bookings = new HashMap<String, Map<Movie, Booking>>();
@@ -50,9 +47,9 @@ public class Theater {
     public String bookASeat(String movieName, int showroomNumber, int seatNumber) {
         //Book a seat
         for (Map.Entry<Movie, Showroom> mapElement : showtimes.entrySet()) {
-            if (mapElement.getKey().getMovieInfo() == movieName
+            if (Objects.equals(mapElement.getKey().getMovieInfo(), movieName)
                     && mapElement.getValue().getShowroomNumber() == showroomNumber
-                    && mapElement.getValue().getSeatState(seatNumber) == false) {
+                    && !mapElement.getValue().getSeatState(seatNumber)) {
                 mapElement.getValue().bookASeat(seatNumber); //Change seat state from 0 to 1
 
                 //Set booking ref
@@ -90,7 +87,7 @@ public class Theater {
 
     //Remove a booking
     //TODO: change seat state back to 0 for the booking
-    public boolean removeABooking(String bookingReferenceNumber){
+    public boolean removeABooking(int bookingReferenceNumber){
         Map<Movie, Booking> returnedValue = bookings.remove(bookingReferenceNumber);
         if(returnedValue == null){
             return false;
@@ -112,7 +109,7 @@ public class Theater {
     //Search for a movie in the DB
     public boolean searchMovie(String movieName){
         for (Movie movie: movieList){
-            if (movie.getMovieInfo().equals(movieName));
+            if (movie.getMovieInfo().equals(movieName))
             return true;
         }return false;
     }
@@ -132,8 +129,16 @@ public class Theater {
         return movieList;
     }
 
-    public void setMovieList(List<Movie> movieList) {
+    public void setMovieList(ArrayList<Movie> movieList) {
         this.movieList = movieList;
+    }
+
+    public void addMovie(Movie newMovie){
+        this.movieList.add(newMovie);
+    }
+
+    public void addShowroom(Showroom showroom){
+        this.showroomList.add(showroom);
     }
 
     public Movie getMovie() {
@@ -158,25 +163,5 @@ public class Theater {
 
     public void setTheaterName(String theaterName) {
         this.theaterName = theaterName;
-    }
-
-    //Temporary loading from DB
-    private static List<Movie> loadFromMovieDB() {
-
-        List<Movie> testMovieDB = new ArrayList();
-
-        testMovieDB.add(new Movie("John Wick 3"));
-        testMovieDB.add(new Movie("Home Alone"));
-        testMovieDB.add(new Movie("James Bond"));
-        return testMovieDB;
-    }
-
-    private static List<Showroom> loadFromShowroomDB(){
-        List<Showroom> testShowroomDB = new ArrayList();
-
-        testShowroomDB.add(new Showroom(1));
-        testShowroomDB.add(new Showroom( 2));
-        testShowroomDB.add(new Showroom(3));
-        return testShowroomDB;
     }
 }

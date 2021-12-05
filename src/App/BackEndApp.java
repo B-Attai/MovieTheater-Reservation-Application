@@ -35,10 +35,10 @@ public class BackEndApp {
 
         String input = myObj.nextLine();  // Read user input
         System.out.println(input);
-        System.out.println("\n" + "Booking Info: " + ticketController.getPayment().getTheater().getABooking(input));  // Output user input
+//        System.out.println("\n" + "Booking Info: " + ticketController.getPayment().getTheater().getABooking(input));  // Output user input
 
         RefundController refundController = new RefundController(user, ticketController.getPayment());
-        System.out.println(refundController.performRefund(input));
+//        System.out.println(refundController.performRefund(input));
 
         System.out.println("\nTesting Seats Search after Refund: " + movieController.searchTheaterSeats(1) + "\n");
 

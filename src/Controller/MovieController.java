@@ -10,13 +10,13 @@ public class MovieController {
     private Theater theater;
 
     //Default controller, using single instance of Theater
-    public MovieController(){
-        setTheater(Theater.getInstance());
-    }
+//    public MovieController(){
+//        setTheater(Theater.getInstance());
+//    }
 
     //Search for a movie
     public String searchMovieName(String movieName){
-        if (theater.searchMovie(movieName) == true){
+        if (theater.searchMovie(movieName)){
             return "Movie " + movieName + " is available.";
         }
         return "Movie " + movieName + "is not available";

@@ -15,9 +15,10 @@ public class RefundController {
     }
 
     //Perform the refund
-    public double performRefund(String bookingReference){
-        double refundAmount = payment.performRefund(user, bookingReference);
-        return refundAmount;
+    public void performRefund(int bookingReference) throws Exception {
+        double amount = 15.;
+        payment.performRefund(bookingReference, amount);
+        System.out.println("Debugging: refund in RefundController called!");
     }
 
     //Getters and Setters
