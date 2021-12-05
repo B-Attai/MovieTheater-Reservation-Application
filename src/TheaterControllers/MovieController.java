@@ -40,7 +40,13 @@ public class MovieController {
 			//2. update this list from query/movie class/model
 			
 			//3. Set Jlist i.e.:
-			view.movielist = new JList(findMovies(movie).toArray());
+//			view.movielist = new JList(findMovies(movie).toArray());
+			DefaultListModel<Movie> model = new DefaultListModel<>();
+			for (Movie m:findMovies(movie)){
+				model.addElement(m);
+			}
+			
+			view.movielist.setModel(model);
 //			view.setMoviesView(findMovies(movie));
 
 

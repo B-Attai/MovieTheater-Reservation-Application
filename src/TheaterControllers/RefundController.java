@@ -1,11 +1,17 @@
 package TheaterControllers;
 
+import Model.Payment;
+import Model.Ticket;
 import TheaterView.Ticket_UI;
 
+import java.util.ArrayList;
+
 public class RefundController {
+//	private final ArrayList<Ticket> ticketDB;
 	private Ticket_UI view;
-	public RefundController(Ticket_UI ticketwindow) {
+	public RefundController(Ticket_UI ticketwindow, ArrayList<Ticket> ticketDB) {
 		view = ticketwindow;
+//		this.ticketDB = ticketDB;
 		
 		view.addRequestListener(e ->{
 			System.out.println("Print Receipt pressed - This is lcoated in Refund Controller!!");
@@ -20,10 +26,26 @@ public class RefundController {
 //			showtime = view.getShowtime();
 //			cost = view.getCost();
 //			date = view.getDate();
+			Payment instance = Payment.getInstance();
+			instance.setTicketDB(ticketDB);
+			int ticketRefNo = Integer.parseInt(view.getTicketID());
+			try {
+				instance.performRefund(ticketRefNo, 5);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 
 
-			
 		});
 	}
+
+//	private Ticket findTicket(int ticketId){
+//		for(Ticket t:ticketDB){
+//			if (t.getBookingReference() == ticketId){
+//				return t;
+//			}
+//		}
+//		return null;
+//	}
 
 }

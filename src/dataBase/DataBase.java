@@ -9,15 +9,17 @@ public class DataBase {
     private final ArrayList<Movie> movies;
     private final Theater theater;
     private final ArrayList<User> users;
+    private final ArrayList<Ticket> tickets;
 
     public DataBase(){
         this.movies = loadFromMovieDB();
         this.theater = new Theater(movies, loadFromShowroomDB());
         this.users = loadUserDB();
+        this.tickets = loadTicketDB();
     }
 
     //Temporary loading from DB
-    public static ArrayList<Movie> loadFromMovieDB() {
+    private static ArrayList<Movie> loadFromMovieDB() {
 
         ArrayList<Movie> testMovieDB = new ArrayList<Movie>();
 
@@ -27,7 +29,7 @@ public class DataBase {
         return testMovieDB;
     }
 
-    public static ArrayList<Showroom> loadFromShowroomDB(){
+    private static ArrayList<Showroom> loadFromShowroomDB(){
         ArrayList<Showroom> testShowroomDB = new ArrayList<Showroom>();
 
         testShowroomDB.add(new Showroom(1, loadFromSeatDB()));
@@ -37,7 +39,7 @@ public class DataBase {
     }
 
     //Temporary seat database
-    public static ArrayList<Seat> loadFromSeatDB(){
+    private static ArrayList<Seat> loadFromSeatDB(){
         ArrayList<Seat> testSeatDB = new ArrayList<Seat>();
 
         testSeatDB.add(new Seat(1, 0, 0));
@@ -59,12 +61,22 @@ public class DataBase {
         return testSeatDB;
     }
 
-    public static ArrayList<User> loadUserDB(){
+    private static ArrayList<User> loadUserDB(){
         ArrayList<User> users = new ArrayList<User>();
 
         users.add(new RegisteredUser("Amir", "123", "123", "123"));
         users.add(new RegisteredUser("1", "1", "123", "123"));
         return users;
+    }
+
+    private ArrayList<Ticket> loadTicketDB(){
+        ArrayList<Ticket> tickets = new ArrayList<>();
+
+        tickets.add(new Ticket(theater, movies.get(0), users.get(0), 1, 1));
+        tickets.add(new Ticket(theater, movies.get(0), users.get(0), 1, 3));
+        tickets.add(new Ticket(theater, movies.get(0), users.get(1), 1, 2));
+
+        return tickets;
     }
 
     public ArrayList<Movie> getMovies() {
@@ -77,5 +89,9 @@ public class DataBase {
 
     public ArrayList<User> getUsers() {
         return users;
+    }
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
     }
 }

@@ -1,7 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class Payment{
     private static Payment paymentInstance;
@@ -10,13 +10,21 @@ public class Payment{
     private UserRefundInterface refundStrategy;
 
     //Storage for Tickets generated to process refunds
-    private List<Ticket> ticketDB;
+    private ArrayList<Ticket> ticketDB;
 
     public static Payment getInstance(PaymentStrategy paymentStrategy){
         if (paymentInstance ==null){
             return new Payment(paymentStrategy);
         }
         paymentInstance.setPaymentStrategy(paymentStrategy);
+        return paymentInstance;
+    }
+
+    public static Payment getInstance(){
+        if (paymentInstance ==null){
+            return new Payment(new CreditCardStrategy() {
+            });
+        }
         return paymentInstance;
     }
 
@@ -117,5 +125,9 @@ public class Payment{
 
     public void setRefundStrategy(UserRefundInterface refundStrategy){
         this.refundStrategy = refundStrategy;
+    }
+
+    public void setTicketDB(ArrayList<Ticket> ticketDB) {
+        this.ticketDB = ticketDB;
     }
 }

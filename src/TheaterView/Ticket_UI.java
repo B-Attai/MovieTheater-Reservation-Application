@@ -1,19 +1,10 @@
 package TheaterView;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.Box;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class Ticket_UI extends JFrame {
 

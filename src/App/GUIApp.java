@@ -36,8 +36,8 @@ public class GUIApp {
 
 
 		MenuController menucontroller = new MenuController(loginWindow, menuWindow, movieWindow, ticketWindow);
-		RefundController refundcontroller = new RefundController(ticketWindow);
-		TicketController ticketcontroller = new TicketController(ticketWindow);
+		RefundController refundcontroller = new RefundController(ticketWindow, theaterDatabase.getTickets());
+		TicketController ticketcontroller = new TicketController(ticketWindow, theaterDatabase.getTickets());
 		
 		
 	}
