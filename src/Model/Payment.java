@@ -1,6 +1,9 @@
 package Model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 public class Payment{
@@ -52,8 +55,7 @@ public class Payment{
     //Perform a refund and remove the booking and ticket for the respective DBs
     //Apply the refund strategy depending on the user
     //Note: Split ticket and booking separated
-    //TODO: Verify time between booking reference and the current time to process refund
-    public void performRefund(int bookingReference) throws Exception {
+    public double performRefund(int bookingReference) throws Exception {
         for(Ticket ticket : ticketDB) {
         System.out.println("TEST: " + (ticket.getBookingReference() == bookingReference));
             if (ticket.getBookingReference() == bookingReference){
@@ -61,33 +63,33 @@ public class Payment{
                 Theater.getInstance().removeABooking(ticket);
                 removeTicket(ticket.getBookingReference());
 
+                verifyTime(ticket);
+
                 if (ticket.getUser().getUserType().equals("Registered")) {
                     setRefundStrategy(new RegisterUserRefund());
                 } else {
                     setRefundStrategy(new RegularUserRefund());
                 }
-                refundStrategy.refund(Theater.getInstance().getTicketPrice());
-                return;
+                return refundStrategy.refund(Theater.getInstance().getTicketPrice());
             }
             // Ticket does not exist
-            throw new Exception("Ticket not found");
         }
+        throw new Exception("Ticket not found");
     }
 
-    //TODO: implement functionality to check the time is within 72 hours.
-    public boolean verifyTime(Ticket ticket){
-        DateTime dt = new DateTime();
-        dt.getCurrentDateTime();
+    public void verifyTime(Ticket ticket) throws ParseException {
+        int hour = ticket.getTime();
+        String date = ticket.getDate();
+        String dateTimeTicket = date + " " + hour + ":00:00";
 
-//        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-//
-//        Date date = format.parse(ticket.getDateTime());
-//
-//        if (dt.getCurrentDateTime() - ticket.getDateTime() > 50){
-//            System.out.println("yes");
-//        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Date currentDate = new Date();
 
-        return true;
+        Date date1 = formatter.parse(dateTimeTicket);
+
+        if((date1.getTime() - currentDate.getTime())/1000/3600 < 72){
+            throw new IllegalCallerException("Show time is within 72 hours. Cannot refund!");
+        }
     }
 
     //Remove ticket in-place while iterating the list

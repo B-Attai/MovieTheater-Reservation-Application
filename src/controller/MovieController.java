@@ -1,8 +1,6 @@
 package controller;
 
-import Model.Movie;
-import Model.Theater;
-import Model.User;
+import Model.*;
 import view.Movie_UI;
 import view.Ticket_UI;
 
@@ -15,15 +13,17 @@ public class MovieController {
 	private ArrayList<Movie> movieDB;
 	private Theater theater;
 	private LoginController currentUserController;
+	TicketController ticketController;
 
 	private String showtimestring;
 	
-	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB, LoginController userCntrl) {
+	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB, LoginController userCntrl, TicketController ticketController) {
 		view = mainWindow;
 		nextview = ticketWindow;
 		this.movieDB = movieDB;
 		this.theater = Theater.getInstance();
 		this.currentUserController = userCntrl;
+		this.ticketController = ticketController;
 		// ---------------------------------- First View -----------------------------------------------//
 		// If Search is press (from first view)
 		/*
@@ -188,16 +188,23 @@ public class MovieController {
 			// Update Database for seats and user ticket
 			
 			// Payment system here...
-			
+			Ticket newTicket = Payment.getInstance().generateTicket(findMovies(view.getMovieSelection()).get(0),
+					currentUserController.getCurrentUser(),
+					view.getRoomComboBoxInput(),
+					view.getSeatComboBoxInput(),
+					showtimestring.split(" ")[0],
+					Integer.parseInt(showtimestring.split(" ")[1]));
 			
 			// Display Ticket Buy UI
 			view.setVisible(false);
 			// Ticket controller needs to be called and populate the ticket UI
 
+			ticketController.setTicket(newTicket);
+
 			String date = showtimestring.split(" ")[0];
 			String time = showtimestring.split(" ")[1];
 			User user = currentUserController.getCurrentUser();
-			nextview.populateTicket(user.getUserName(), "0010", view.getMovienameInput(), time+":00", String.valueOf(theater.getTicketPrice()), date);
+			nextview.populateTicket(user.getUserName(),  ""+newTicket.getBookingReference(), view.getMovienameInput(), time+":00", String.valueOf(theater.getTicketPrice()), date);
 			// Basically pass those from each model populateTicket(String name, String ticket, String moviename, String Showtime, String Cost, String Date) 
 			nextview.printReceiptButton.setVisible(true);
 			nextview.setVisible(true);

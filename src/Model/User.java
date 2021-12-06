@@ -18,6 +18,7 @@ public class User {
     public User(String username, String password) {
         this.userName = username;
         this.userPass = password;
+        userType = "guest";
     }
 
     //Getters and setters

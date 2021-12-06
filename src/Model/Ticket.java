@@ -46,7 +46,7 @@ public class Ticket {
         return "Ticket{" +
                 "user=" + user.getUserName() +
                 ", bookingReference=" + bookingReference +
-                ", movie=" + movie.getMovieInfo() +
+                ", movie=" + movie.getMovieName() +
                 ", date='" + date + '\'' +
                 ", hour='" + time + '\'' +
                 ", showroomNumber=" + showroomNumber +

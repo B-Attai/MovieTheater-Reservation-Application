@@ -4,6 +4,7 @@ import Model.Payment;
 import Model.Ticket;
 import view.Ticket_UI;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class RefundController {
@@ -30,8 +31,10 @@ public class RefundController {
 			instance.setTicketDB(ticketDB);
 			int ticketRefNo = Integer.parseInt(view.getTicketID());
 			try {
-				instance.performRefund(ticketRefNo);
+				double amountReturned = instance.performRefund(ticketRefNo);
+				JOptionPane.showMessageDialog(null, "Refund successful.\nAmount: " + amountReturned + '$', "Successful banking operation" ,JOptionPane.PLAIN_MESSAGE);
 			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR" ,JOptionPane.PLAIN_MESSAGE);
 				ex.printStackTrace();
 			}
 

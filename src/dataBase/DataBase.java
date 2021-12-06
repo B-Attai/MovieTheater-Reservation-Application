@@ -65,6 +65,7 @@ public class DataBase {
 
         users.add(new RegisteredUser("Amir", "123", "123", "123"));
         users.add(new RegisteredUser("1", "1", "123", "123"));
+        users.add(new User("1", "1"));
         return users;
     }
 
@@ -73,24 +74,34 @@ public class DataBase {
 
         ArrayList<Ticket> tickets = new ArrayList<>();
 
-        tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 1, "12-12-21", 12));
-        tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 3, "12-12-21", 12));
-        tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "12-12-21", 12));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 1, "12-12-2021", 12));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 3, "12-12-2021", 12));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "12-12-2021", 12));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "07-12-2021", 12));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(2), 1, 4, "12-12-2021", 12));
 
         return tickets;
     }
 
     private void setupTheater(){
         System.out.println("setupTheater");
-        TheaterShowRooms tshr = new TheaterShowRooms(12, loadFromShowroomDB());
+        TheaterShowRooms tshr1 = new TheaterShowRooms(12, loadFromShowroomDB());
+        TheaterShowRooms tshr2 = new TheaterShowRooms(12, loadFromShowroomDB());
 
-        ShowTime sh1 = new ShowTime("12-12-21");
-        sh1.addTimeSlot(tshr);
+        ShowTime sh1 = new ShowTime("12-12-2021");
+        ShowTime sh2 = new ShowTime("07-12-2021");
+        sh1.addTimeSlot(tshr1);
+        sh2.addTimeSlot(tshr2);
 
-        ShowDate shd = new ShowDate("12-12-21");
-        shd.addShow("James Bond", sh1);
+        ShowDate shd1 = new ShowDate("12-12-2021");
+        shd1.addShow("James Bond", sh1);
 
-        Theater.getInstance().addShowDate(shd);
+        ShowDate shd2 = new ShowDate("07-12-2021");
+        shd2.addShow("James Bond", sh2);
+
+        Theater.getInstance().addShowDate(shd1);
+        Theater.getInstance().addShowDate(shd2);
+        Theater.getInstance().setMovieList(movies);
     }
 
     public ArrayList<Movie> getMovies() {
