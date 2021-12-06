@@ -101,7 +101,6 @@ public class Theater {
     public void makeBooking(Ticket ticket){
         String movie = ticket.getMovie().getMovieName();
         String date = ticket.getDate();
-        String time = ""+ticket.getTime();
         int hour = ticket.getTime();
         int roomNumber = ticket.getShowroomNumber();
         int seatNumber = ticket.getSeatNumber();
@@ -111,7 +110,6 @@ public class Theater {
     public void removeABooking(Ticket ticket){
         String movie = ticket.getMovie().getMovieName();
         String date = ticket.getDate();
-        String time = ""+ticket.getTime();
         int hour = ticket.getTime();
         int roomNumber = ticket.getShowroomNumber();
         int seatNumber = ticket.getSeatNumber();
