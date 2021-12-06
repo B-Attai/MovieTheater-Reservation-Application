@@ -1,17 +1,29 @@
-package TheaterControllers;
+package controller;
 
-import javax.swing.JOptionPane;
+import Model.*;
+import view.Movie_UI;
+import view.Ticket_UI;
 
-import TheaterView.Movie_UI;
-import TheaterView.Ticket_UI;
+import javax.swing.*;
+import java.util.ArrayList;
 
 public class MovieController {
 	private Movie_UI view;
 	private Ticket_UI nextview;
+	private ArrayList<Movie> movieDB;
+	private Theater theater;
+	private LoginController currentUserController;
+	TicketController ticketController;
+
+	private String showtimestring;
 	
-	public MovieController(Movie_UI mainwindow, Ticket_UI ticketwindow) {
-		view = mainwindow;
-		nextview = ticketwindow;
+	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB, LoginController userCntrl, TicketController ticketController) {
+		view = mainWindow;
+		nextview = ticketWindow;
+		this.movieDB = movieDB;
+		this.theater = Theater.getInstance();
+		this.currentUserController = userCntrl;
+		this.ticketController = ticketController;
 		// ---------------------------------- First View -----------------------------------------------//
 		// If Search is press (from first view)
 		/*
@@ -25,8 +37,10 @@ public class MovieController {
 			System.out.println("Search Movie pressed");
 			// Get 2 arguments Username, Passwowrd
 			String movie = view.getMovienameInput();
+			System.out.println(movie);
 			
 			// Backend logic stuffs.
+
 			// Create SQL Query or pass movie name to movie. Get a list of possible movies
 			
 			//1. Update Jlist for displaying movies:
@@ -34,8 +48,13 @@ public class MovieController {
 			//2. update this list from query/movie class/model
 			
 			//3. Set Jlist i.e.:
-			// view.movielist = new JList (movies.toArray());
-			
+			DefaultListModel<Movie> model = new DefaultListModel<>();
+			for (Movie m:findMovies(movie)){
+				model.addElement(m);
+			}
+			view.movielist.setModel(model);
+
+
 		});
 		
 		// ---------------------------------- 2nd View -----------------------------------------------//
@@ -48,12 +67,17 @@ public class MovieController {
 			
 			// Not sure how complex we want this but I think ideally we just showcase 1 movie from the selection
 			// and we just do nothing here.
-			// String SelectedMovie = view.getMovieSelection(); // Returning a string, but could return selected list OR element easy change instead...
+			 String SelectedMovie = view.getMovieSelection(); // Returning a string, but could return selected list OR element easy change instead...
 
 			// Set Showtime from backend (once we get confirm movie)
 			// ArrayList<showtime> showtimelist = moviemodel.getshowtimes(SelectedMovie);
 			// view.showtimeList = new Jlist(showtimeList.toArray())
-			
+			DefaultListModel<String> model = new DefaultListModel<>();
+			for (String shd:theater.getAllShowDatesByMovie(view.getMovienameInput())){
+				model.addElement(shd);
+			}
+			view.showtimeList.setModel(model);
+
 			
 			// Move to next View
 			view.layeredPanel.removeAll();
@@ -72,14 +96,25 @@ public class MovieController {
 			// Example of itneraction with model
 			
 			// Get selected showtime
-//			String showtimestring = view.getSelectedShowtime();
+			showtimestring = view.getSelectedShowtime();
+
 			
 			// Interact with backend As shown above.
 			// Get Seats of showtime from backend
 			
 			// Set available row and columsn in view Foe example:
+			ArrayList<Integer> rows = theater.returnShowrooms(view.getMovienameInput(), showtimestring);
+
 			//int[] rows = arrayList.toArray(movie or showtime.getRowSeats()]);
 			//int[] cols = arrayList.toArray(movie or showtime.getColSeats()]);
+//			view.SeatColComboBoxInput = new JComboBox(rows);
+			DefaultComboBoxModel<Integer> modelRoom = new DefaultComboBoxModel<>();
+			for (Integer shd:rows){
+				modelRoom.addElement(shd);
+			}
+			view.RoomComboBoxInput.setModel(modelRoom);
+
+
 			//view.SeatRowComboBox = new JComboBox(rows);
 			//view.SeatColComboBox = new JComboBox(cols);
 			
@@ -94,7 +129,15 @@ public class MovieController {
 		
 		view.addShowAvailableSeatListener(e ->{
 			// We can't print a 2d array to jframe, need to create a graphic, this button would pop up the grpahic!
-			System.out.println("Graphic for seats should be POPPING UP pressed");
+			System.out.println("List of available seats is displayed");
+
+			ArrayList<Integer> seats = theater.returnRoomNumbers(view.getMovieSelection(), showtimestring, view.getRoomComboBoxInput());
+			System.out.println(seats);
+			DefaultComboBoxModel<Integer> modelSeat = new DefaultComboBoxModel<>();
+			for (Integer shd:seats){
+				modelSeat.addElement(shd);
+			}
+			view.SeatComboBoxInput.setModel(modelSeat);
 			
 			//int[] rows = arrayList.toArray(movie or showtime.getRowSeats()]);
 			//int[] cols = arrayList.toArray(movie or showtime.getColSeats()]);
@@ -110,14 +153,26 @@ public class MovieController {
 		// if Confirm Seat from 3page is clicked
 		view.addConfirmSeatListener(e ->{
 			// Getting selection
-//			int selectedrow = view.getSeatRowComboBoxInput();
-//			int selectedcol = view.getSeatColComboBoxInput();
+			int selectedRoom = view.getRoomComboBoxInput();
+			int selectedSeat = view.getSeatComboBoxInput();
 			
 			// Display next view
 			view.layeredPanel.removeAll();
 			view.layeredPanel.add(view.buyPanel);
 			// Printint summary of tickets
-			view.ConfirmationSummaryTextArea.setText("Summary of ticket should be here");
+			view.ConfirmationSummaryTextArea.setText(
+					"Summary of ticket: \nMovie: " +
+					view.getMovienameInput() +
+					"\nShow date and time: " +
+					showtimestring +
+					"\nShow room: " +
+					view.getRoomComboBoxInput() +
+					"\nSeat number: " +
+					view.getSeatComboBoxInput() +
+					"\nPrice: " +
+					theater.getTicketPrice() + '$'
+			);
+
 			// view.ConfirmationSummaryTextArea.setText(print stuffs about movie, showtime, date, price)
 			view.buyPanel.setVisible(true);
 			view.layeredPanel.repaint();
@@ -133,23 +188,40 @@ public class MovieController {
 			// Update Database for seats and user ticket
 			
 			// Payment system here...
-			
+			Ticket newTicket = Payment.getInstance().generateTicket(findMovies(view.getMovieSelection()).get(0),
+					currentUserController.getCurrentUser(),
+					view.getRoomComboBoxInput(),
+					view.getSeatComboBoxInput(),
+					showtimestring.split(" ")[0],
+					Integer.parseInt(showtimestring.split(" ")[1]));
 			
 			// Display Ticket Buy UI
 			view.setVisible(false);
 			// Ticket controller needs to be called and populate the ticket UI
-			
-			nextview.populateTicket("Michael", "0010", "Spiderman Far from home", "7pm Saturday", "14$", "17th December");
+
+			ticketController.setTicket(newTicket);
+
+			String date = showtimestring.split(" ")[0];
+			String time = showtimestring.split(" ")[1];
+			User user = currentUserController.getCurrentUser();
+			nextview.populateTicket(user.getUserName(),  ""+newTicket.getBookingReference(), view.getMovienameInput(), time+":00", String.valueOf(theater.getTicketPrice()), date);
 			// Basically pass those from each model populateTicket(String name, String ticket, String moviename, String Showtime, String Cost, String Date) 
 			nextview.printReceiptButton.setVisible(true);
 			nextview.setVisible(true);
 
 
 		});
+	}
 
-		
-		
-		
+	private ArrayList<Movie> findMovies(String  movie){
+		ArrayList<Movie> movies = new ArrayList<>();
+		for (Movie m:theater.getMovieList()){
+			if (m.getMovieName().equals(movie)){
+				System.out.println(m);
+				movies.add(m);
+			}
+		}
+		return movies;
 	}
 
 }
