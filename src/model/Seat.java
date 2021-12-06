@@ -5,12 +5,10 @@ public class Seat {
     private int state = 0; //Default state of the seat, 0 to represent empty
     private int seatNumber;
     private int seatRow;
-    private int seatColumn;
 
-    public Seat(int seatNumber, int seatRow, int seatColumn) {
+    public Seat(int seatNumber, int seatRow) {
         this.seatNumber = seatNumber;
         this.seatRow = seatRow;
-        this.seatColumn = seatColumn;
     }
 
     @Override
@@ -19,7 +17,6 @@ public class Seat {
                 "state=" + state +
                 ", seatNumber=" + seatNumber +
                 ", seatRow=" + seatRow +
-                ", seatColumn=" + seatColumn +
                 '}';
     }
 
@@ -39,15 +36,6 @@ public class Seat {
     public void setSeatRow(int seatRow) {
         this.seatRow = seatRow;
     }
-
-    public long getSeatColumn() {
-        return seatColumn;
-    }
-
-    public void setSeatColumn(int seatColumn) {
-        this.seatColumn = seatColumn;
-    }
-
 
     public int getState() {
         return state;

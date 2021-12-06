@@ -41,30 +41,30 @@ public class DataBase {
     private static ArrayList<Seat> loadFromSeatDB(){
         ArrayList<Seat> testSeatDB = new ArrayList<Seat>();
 
-        testSeatDB.add(new Seat(1, 0, 0));
-        testSeatDB.add(new Seat(2, 0, 1));
-        testSeatDB.add(new Seat(3, 0, 2));
-        testSeatDB.add(new Seat(4, 0, 3));
-        testSeatDB.add(new Seat(5, 1, 0));
-        testSeatDB.add(new Seat(6, 1, 1));
-        testSeatDB.add(new Seat(7, 1, 2));
-        testSeatDB.add(new Seat(8, 1, 3));
-        testSeatDB.add(new Seat(9, 2, 0));
-        testSeatDB.add(new Seat(10, 2, 1));
-        testSeatDB.add(new Seat(11, 2, 2));
-        testSeatDB.add(new Seat(12, 2, 3));
-        testSeatDB.add(new Seat(13, 3, 0));
-        testSeatDB.add(new Seat(14, 3, 1));
-        testSeatDB.add(new Seat(15, 3, 2));
-        testSeatDB.add(new Seat(16, 3, 3));
+        testSeatDB.add(new Seat(1, 0));
+        testSeatDB.add(new Seat(2, 0));
+        testSeatDB.add(new Seat(3, 0));
+        testSeatDB.add(new Seat(4, 0));
+        testSeatDB.add(new Seat(5, 1));
+        testSeatDB.add(new Seat(6, 1));
+        testSeatDB.add(new Seat(7, 1));
+        testSeatDB.add(new Seat(8, 1));
+        testSeatDB.add(new Seat(9, 2));
+        testSeatDB.add(new Seat(10, 2));
+        testSeatDB.add(new Seat(11, 2));
+        testSeatDB.add(new Seat(12, 2));
+        testSeatDB.add(new Seat(13, 3));
+        testSeatDB.add(new Seat(14, 3));
+        testSeatDB.add(new Seat(15, 3));
+        testSeatDB.add(new Seat(16, 3));
         return testSeatDB;
     }
 
     private static ArrayList<User> loadUserDB(){
         ArrayList<User> users = new ArrayList<User>();
 
-        users.add(new RegisteredUser("Amir", "123", "123", "123"));
-        users.add(new RegisteredUser("1", "1", "123", "123"));
+        users.add(new RegisteredUser("Amir", "123"));
+        users.add(new RegisteredUser("1", "1"));
         users.add(new User("1", "1"));
         return users;
     }
