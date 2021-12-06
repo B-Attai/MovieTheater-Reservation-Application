@@ -1,6 +1,6 @@
 package controller;
 
-import Model.*;
+import model.*;
 import view.Movie_UI;
 import view.Ticket_UI;
 

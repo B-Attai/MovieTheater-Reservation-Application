@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * NOTE Theater is currently a SINGLETON.

@@ -1,6 +1,6 @@
 package dataBase;
 
-import Model.*;
+import model.*;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package controller;
 
-import Model.Ticket;
-import Model.User;
+import model.Ticket;
+import model.User;
 import view.Ticket_UI;
 
 import javax.swing.*;

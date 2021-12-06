@@ -1,6 +1,6 @@
 package controller;
 
-import Model.User;
+import model.User;
 import view.Login_UI;
 import view.Menu_UI;
 
