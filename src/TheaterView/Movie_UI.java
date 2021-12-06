@@ -11,8 +11,8 @@ public class Movie_UI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField movienameInput;
-	private JComboBox seatRowComboBoxInput;
-	private JComboBox SeatColComboBoxInput;
+	public JComboBox RoomComboBoxInput;
+	public JComboBox SeatComboBoxInput;
 	public JList movielist;
 	private Button searchButton;
 	private JButton movieButton;
@@ -134,28 +134,28 @@ public class Movie_UI extends JFrame {
 		lblNewLabel_3.setBounds(30, 25, 93, 14);
 		seatPanel.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_5 = new JLabel("Row");
+		JLabel lblNewLabel_5 = new JLabel("Room");
 		lblNewLabel_5.setBounds(139, 192, 46, 14);
 		seatPanel.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_6 = new JLabel("Column");
+		JLabel lblNewLabel_6 = new JLabel("Seat");
 		lblNewLabel_6.setBounds(139, 217, 46, 14);
 		seatPanel.add(lblNewLabel_6);
 		
-		seatRowComboBoxInput = new JComboBox();
-		seatRowComboBoxInput.setBounds(229, 188, 48, 22);
-		seatPanel.add(seatRowComboBoxInput);
+		RoomComboBoxInput = new JComboBox();
+		RoomComboBoxInput.setBounds(229, 188, 48, 22);
+		seatPanel.add(RoomComboBoxInput);
 		
-		SeatColComboBoxInput = new JComboBox();
-		SeatColComboBoxInput.setBounds(229, 213, 48, 22);
-		seatPanel.add(SeatColComboBoxInput);
+		SeatComboBoxInput = new JComboBox();
+		SeatComboBoxInput.setBounds(229, 213, 48, 22);
+		seatPanel.add(SeatComboBoxInput);
 		
 		seatButton = new JButton("Confirm Seat");
 
 		seatButton.setBounds(164, 266, 113, 23);
 		seatPanel.add(seatButton);
 		
-		ShowSeats = new JButton("Click to show Available Seats");
+		ShowSeats = new JButton("Check for availability");
 		ShowSeats.setBounds(120, 85, 193, 56);
 		seatPanel.add(ShowSeats);
 		
@@ -243,13 +243,13 @@ public class Movie_UI extends JFrame {
 	}
 
 	// Return Selected Row of seats
-	public int getSeatRowComboBoxInput() {
-		return seatRowComboBoxInput.getSelectedIndex();
+	public int getRoomComboBoxInput() {
+		return RoomComboBoxInput.getSelectedIndex();
 	}
 	
 	// Return column of seat
-	public int getSeatColComboBoxInput() {
-		return SeatColComboBoxInput.getSelectedIndex();
+	public int getSeatComboBoxInput() {
+		return SeatComboBoxInput.getSelectedIndex();
 	}
 	
 	

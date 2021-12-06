@@ -30,7 +30,7 @@ public class RefundController {
 			instance.setTicketDB(ticketDB);
 			int ticketRefNo = Integer.parseInt(view.getTicketID());
 			try {
-				instance.performRefund(ticketRefNo, 5);
+//				instance.performRefund(ticketRefNo, 5);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

@@ -1,6 +1,7 @@
 package TheaterControllers;
 
 import Model.Movie;
+import Model.Theater;
 import TheaterView.Movie_UI;
 import TheaterView.Ticket_UI;
 
@@ -11,11 +12,15 @@ public class MovieController {
 	private Movie_UI view;
 	private Ticket_UI nextview;
 	private ArrayList<Movie> movieDB;
+	private Theater theater;
+
+	private String showtimestring;
 	
-	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB) {
+	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB, Theater theater) {
 		view = mainWindow;
 		nextview = ticketWindow;
 		this.movieDB = movieDB;
+		this.theater = theater;
 		// ---------------------------------- First View -----------------------------------------------//
 		// If Search is press (from first view)
 		/*
@@ -40,14 +45,11 @@ public class MovieController {
 			//2. update this list from query/movie class/model
 			
 			//3. Set Jlist i.e.:
-//			view.movielist = new JList(findMovies(movie).toArray());
 			DefaultListModel<Movie> model = new DefaultListModel<>();
 			for (Movie m:findMovies(movie)){
 				model.addElement(m);
 			}
-			
 			view.movielist.setModel(model);
-//			view.setMoviesView(findMovies(movie));
 
 
 		});
@@ -67,7 +69,12 @@ public class MovieController {
 			// Set Showtime from backend (once we get confirm movie)
 			// ArrayList<showtime> showtimelist = moviemodel.getshowtimes(SelectedMovie);
 			// view.showtimeList = new Jlist(showtimeList.toArray())
-			
+			DefaultListModel<String> model = new DefaultListModel<>();
+			for (String shd:theater.getAllShowDatesByMovie(view.getMovienameInput())){
+				model.addElement(shd);
+			}
+			view.showtimeList.setModel(model);
+
 			
 			// Move to next View
 			view.layeredPanel.removeAll();
@@ -86,14 +93,25 @@ public class MovieController {
 			// Example of itneraction with model
 			
 			// Get selected showtime
-//			String showtimestring = view.getSelectedShowtime();
+			showtimestring = view.getSelectedShowtime();
+
 			
 			// Interact with backend As shown above.
 			// Get Seats of showtime from backend
 			
 			// Set available row and columsn in view Foe example:
+			ArrayList<Integer> rows = theater.returnShowrooms(view.getMovienameInput(), showtimestring);
+
 			//int[] rows = arrayList.toArray(movie or showtime.getRowSeats()]);
 			//int[] cols = arrayList.toArray(movie or showtime.getColSeats()]);
+//			view.SeatColComboBoxInput = new JComboBox(rows);
+			DefaultComboBoxModel<Integer> modelRoom = new DefaultComboBoxModel<>();
+			for (Integer shd:rows){
+				modelRoom.addElement(shd);
+			}
+			view.RoomComboBoxInput.setModel(modelRoom);
+
+
 			//view.SeatRowComboBox = new JComboBox(rows);
 			//view.SeatColComboBox = new JComboBox(cols);
 			
@@ -109,6 +127,14 @@ public class MovieController {
 		view.addShowAvailableSeatListener(e ->{
 			// We can't print a 2d array to jframe, need to create a graphic, this button would pop up the grpahic!
 			System.out.println("Graphic for seats should be POPPING UP pressed");
+
+			ArrayList<Integer> seats = theater.returnRoomNumbers(view.getMovieSelection(), showtimestring, view.getRoomComboBoxInput()+1);
+			System.out.println(seats);
+			DefaultComboBoxModel<Integer> modelSeat = new DefaultComboBoxModel<>();
+			for (Integer shd:seats){
+				modelSeat.addElement(shd);
+			}
+			view.SeatComboBoxInput.setModel(modelSeat);
 			
 			//int[] rows = arrayList.toArray(movie or showtime.getRowSeats()]);
 			//int[] cols = arrayList.toArray(movie or showtime.getColSeats()]);
@@ -162,9 +188,20 @@ public class MovieController {
 		});
 	}
 
+//	private ArrayList<Movie> findMovies(String  movie){
+//		ArrayList<Movie> movies = new ArrayList<>();
+//		for (Movie m:movieDB){
+//			if (m.getMovieName().equals(movie)){
+//				System.out.println(m);
+//				movies.add(m);
+//			}
+//		}
+//		return movies;
+//	}
+
 	private ArrayList<Movie> findMovies(String  movie){
 		ArrayList<Movie> movies = new ArrayList<>();
-		for (Movie m:movieDB){
+		for (Movie m:theater.getMovieList()){
 			if (m.getMovieName().equals(movie)){
 				System.out.println(m);
 				movies.add(m);

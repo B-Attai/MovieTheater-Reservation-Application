@@ -13,7 +13,7 @@ public class DataBase {
 
     public DataBase(){
         this.movies = loadFromMovieDB();
-        this.theater = new Theater(movies, loadFromShowroomDB());
+        this.theater = setupTheater();
         this.users = loadUserDB();
         this.tickets = loadTicketDB();
     }
@@ -77,6 +77,21 @@ public class DataBase {
         tickets.add(new Ticket(theater, movies.get(0), users.get(1), 1, 2));
 
         return tickets;
+    }
+
+    private static Theater setupTheater(){
+        TheaterShowRooms tshr = new TheaterShowRooms(12, loadFromShowroomDB());
+
+        ShowTime sh1 = new ShowTime("12-12-21");
+        sh1.addTimeSlot(tshr);
+
+        ShowDate shd = new ShowDate("12-12-21");
+        shd.addShow("James Bond", sh1);
+
+        Theater theater = new Theater(loadFromMovieDB());
+        theater.addShowDate(shd);
+
+        return theater;
     }
 
     public ArrayList<Movie> getMovies() {

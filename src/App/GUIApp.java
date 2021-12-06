@@ -32,7 +32,7 @@ public class GUIApp {
 		// Creating Controllers (NOTE BACKEND PEOPLE NEED TO PASS IN MODEL AS WELL, FOR NOW JUST PASSING IN UI to TEST UI LOGIC)
 		LoginController logincontroller = new LoginController(loginWindow, menuWindow, theaterDatabase.getUsers());
 
-		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow, theaterDatabase.getMovies());
+		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow, theaterDatabase.getMovies(), theaterDatabase.getTheater());
 
 
 		MenuController menucontroller = new MenuController(loginWindow, menuWindow, movieWindow, ticketWindow);

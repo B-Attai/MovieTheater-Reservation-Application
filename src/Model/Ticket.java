@@ -49,7 +49,7 @@ public class Ticket {
                 ", bookingReference=" + bookingReference +
                 ", movie=" + movie.getMovieInfo() +
                 ", dateTime='" + dateTime + '\'' +
-                ", theater=" + theater.getTheaterName() +
+//                ", theater=" + theater.getTheaterName() +
                 ", showroomNumber=" + showroomNumber +
                 ", seatNumber=" + seatNumber +
                 '}';

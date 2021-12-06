@@ -2,8 +2,6 @@ package Model;
 
 import java.util.ArrayList;
 
-import static java.lang.Math.sqrt;
-
 public class Showroom {
 
     private ArrayList<Seat> seatList;
@@ -16,20 +14,20 @@ public class Showroom {
     }
 
     //Temporary method to get the seat mapping formatted in a string
-    public String getSeatList() {
-        StringBuilder sb = new StringBuilder();
-        StringBuilder sb2 = new StringBuilder();
-        int counter = 0;
-        for(int i = 0; i < sqrt(seatList.size()); i++){
-            for (int j = 0; j < sqrt(seatList.size()); j++){
-                sb.append(seatList.get(counter));
-                counter++;
-            }
-            sb2.append("\n" + sb);
-            sb.setLength(0);
-        }
-        return sb2.toString();
-    }
+//    public String getSeatList() {
+//        StringBuilder sb = new StringBuilder();
+//        StringBuilder sb2 = new StringBuilder();
+//        int counter = 0;
+//        for(int i = 0; i < sqrt(seatList.size()); i++){
+//            for (int j = 0; j < sqrt(seatList.size()); j++){
+//                sb.append(seatList.get(counter));
+//                counter++;
+//            }
+//            sb2.append("\n" + sb);
+//            sb.setLength(0);
+//        }
+//        return sb2.toString();
+//    }
 
 
     //Always check seat state before setting a new seat state
@@ -42,6 +40,10 @@ public class Showroom {
 
     //Book a seat and change the seat state
     public void bookASeat(int seatNumber){
+        if (seatList.get(seatNumber-1).getState() ==1){
+            System.out.println("seat is booked");
+            throw new IllegalCallerException("Seat is already booked");
+        }
         seatList.get(seatNumber-1).setState(1); // -1 for the 0 index on the seatList
         System.out.println("Seat " + seatNumber + " booked!");
     }
@@ -71,5 +73,13 @@ public class Showroom {
 
     public void setSeatList(ArrayList<Seat> seatList) {
         this.seatList = seatList;
+    }
+
+    public int getNumberOfSeats(){
+        return seatList.size();
+    }
+
+    public ArrayList<Seat> getSeatList() {
+        return seatList;
     }
 }

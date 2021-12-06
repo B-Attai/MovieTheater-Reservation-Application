@@ -24,11 +24,11 @@ public class Seat {
     }
 
     //Getters and Setters
-    public int getSeatName() {
+    public int getSeatNumber() {
         return seatNumber;
     }
 
-    public void setSeatName(int seatNumber) {
+    public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
     }
 

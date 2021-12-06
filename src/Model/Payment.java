@@ -65,26 +65,26 @@ public class Payment{
     //Apply the refund strategy depending on the user
     //Note: Split ticket and booking separated
     //TODO: Verify time between booking reference and the current time to process refund
-    public void performRefund(int bookingReference, double amount) throws Exception {
-        for(Ticket ticket : ticketDB) {
-        System.out.println("TEST: " + (ticket.getBookingReference() == bookingReference));
-            if (ticket.getBookingReference() == bookingReference){
-                System.out.println("Ticket found!");
-                removeTicket(ticket.getBookingReference());
-                ticket.getTheater().removeABooking(bookingReference);
-
-                if (ticket.getUser().getUserType().equals("Registered")) {
-                    setRefundStrategy(new RegisterUserRefund());
-                } else {
-                    setRefundStrategy(new RegularUserRefund());
-                }
-                refundStrategy.refund(amount);
-                return;
-            }
-            // Ticket does not exist
-            throw new Exception("Ticket not found");
-        }
-    }
+//    public void performRefund(int bookingReference, double amount) throws Exception {
+//        for(Ticket ticket : ticketDB) {
+//        System.out.println("TEST: " + (ticket.getBookingReference() == bookingReference));
+//            if (ticket.getBookingReference() == bookingReference){
+//                System.out.println("Ticket found!");
+//                removeTicket(ticket.getBookingReference());
+//                ticket.getTheater().removeABooking(bookingReference);
+//
+//                if (ticket.getUser().getUserType().equals("Registered")) {
+//                    setRefundStrategy(new RegisterUserRefund());
+//                } else {
+//                    setRefundStrategy(new RegularUserRefund());
+//                }
+//                refundStrategy.refund(amount);
+//                return;
+//            }
+//            // Ticket does not exist
+//            throw new Exception("Ticket not found");
+//        }
+//    }
 
     //TODO: implement functionality to check the time is within 72 hours.
     public boolean verifyTime(Ticket ticket){
