@@ -126,9 +126,9 @@ public class MovieController {
 		
 		view.addShowAvailableSeatListener(e ->{
 			// We can't print a 2d array to jframe, need to create a graphic, this button would pop up the grpahic!
-			System.out.println("Graphic for seats should be POPPING UP pressed");
+			System.out.println("List of available seats is displayed");
 
-			ArrayList<Integer> seats = theater.returnRoomNumbers(view.getMovieSelection(), showtimestring, view.getRoomComboBoxInput()+1);
+			ArrayList<Integer> seats = theater.returnRoomNumbers(view.getMovieSelection(), showtimestring, view.getRoomComboBoxInput());
 			System.out.println(seats);
 			DefaultComboBoxModel<Integer> modelSeat = new DefaultComboBoxModel<>();
 			for (Integer shd:seats){
@@ -150,14 +150,26 @@ public class MovieController {
 		// if Confirm Seat from 3page is clicked
 		view.addConfirmSeatListener(e ->{
 			// Getting selection
-//			int selectedrow = view.getSeatRowComboBoxInput();
-//			int selectedcol = view.getSeatColComboBoxInput();
+			int selectedRoom = view.getRoomComboBoxInput();
+			int selectedSeat = view.getSeatComboBoxInput();
 			
 			// Display next view
 			view.layeredPanel.removeAll();
 			view.layeredPanel.add(view.buyPanel);
 			// Printint summary of tickets
-			view.ConfirmationSummaryTextArea.setText("Summary of ticket should be here");
+			view.ConfirmationSummaryTextArea.setText(
+					"Summary of ticket: \nMovie: " +
+					view.getMovienameInput() +
+					"\nShow date and time: " +
+					showtimestring +
+					"\nShow room: " +
+					view.getRoomComboBoxInput() +
+					"\nSeat number: " +
+					view.getSeatComboBoxInput() +
+					"\nPrice: " +
+					theater.getTicketPrice() + '$'
+			);
+
 			// view.ConfirmationSummaryTextArea.setText(print stuffs about movie, showtime, date, price)
 			view.buyPanel.setVisible(true);
 			view.layeredPanel.repaint();

@@ -6,6 +6,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class Movie_UI extends JFrame {
 
@@ -244,12 +245,13 @@ public class Movie_UI extends JFrame {
 
 	// Return Selected Row of seats
 	public int getRoomComboBoxInput() {
-		return RoomComboBoxInput.getSelectedIndex();
+		return Integer.parseInt(Objects.requireNonNull(RoomComboBoxInput.getSelectedItem()).toString());
 	}
 	
 	// Return column of seat
 	public int getSeatComboBoxInput() {
-		return SeatComboBoxInput.getSelectedIndex();
+		return Integer.parseInt(Objects.requireNonNull(SeatComboBoxInput.getSelectedItem()).toString());
+//		return SeatComboBoxInput.getSelectedIndex();
 	}
 	
 	

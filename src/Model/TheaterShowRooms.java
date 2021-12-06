@@ -44,6 +44,8 @@ public class TheaterShowRooms {
     public ArrayList<Integer> getShowRoomNumbers(int showRoomNumber){
         ArrayList<Integer> seatNumbers = new ArrayList<>();
         for (Seat s:theaterShowRooms.get(showRoomNumber).getSeatList()){
+            // checking seat availability
+            if (s.getState()==1) continue;
             seatNumbers.add(s.getSeatNumber());
         }
         return seatNumbers;

@@ -12,7 +12,7 @@ public class Theater {
     private HashMap<String, ShowDate> operationDates;
     private ArrayList<Movie> movieList;
     private String theaterName;
-    private double ticketPrice;
+    private final double ticketPrice;
 
     public Theater(ArrayList<Movie> movieList, HashMap<String, ShowDate> operationDates){
         this.movieList = movieList;
@@ -98,5 +98,9 @@ public class Theater {
         }
         System.out.println(myResult);
         return myResult;
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
     }
 }
