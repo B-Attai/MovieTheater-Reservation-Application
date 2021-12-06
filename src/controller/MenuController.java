@@ -1,11 +1,9 @@
-package TheaterControllers;
+package controller;
 
-import javax.swing.JOptionPane;
-
-import TheaterView.Login_UI;
-import TheaterView.Menu_UI;
-import TheaterView.Movie_UI;
-import TheaterView.Ticket_UI;
+import view.Login_UI;
+import view.Menu_UI;
+import view.Movie_UI;
+import view.Ticket_UI;
 
 public class MenuController {
 	private Login_UI loginView;

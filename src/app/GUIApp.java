@@ -1,10 +1,10 @@
-package App;
+package app;
 
-import TheaterControllers.*;
-import TheaterView.Login_UI;
-import TheaterView.Menu_UI;
-import TheaterView.Movie_UI;
-import TheaterView.Ticket_UI;
+import controller.*;
+import view.Login_UI;
+import view.Menu_UI;
+import view.Movie_UI;
+import view.Ticket_UI;
 import dataBase.DataBase;
 
 public class GUIApp {
@@ -32,7 +32,7 @@ public class GUIApp {
 		// Creating Controllers (NOTE BACKEND PEOPLE NEED TO PASS IN MODEL AS WELL, FOR NOW JUST PASSING IN UI to TEST UI LOGIC)
 		LoginController logincontroller = new LoginController(loginWindow, menuWindow, theaterDatabase.getUsers());
 
-		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow, theaterDatabase.getMovies(), theaterDatabase.getTheater());
+		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow, theaterDatabase.getMovies(), logincontroller);
 
 
 		MenuController menucontroller = new MenuController(loginWindow, menuWindow, movieWindow, ticketWindow);

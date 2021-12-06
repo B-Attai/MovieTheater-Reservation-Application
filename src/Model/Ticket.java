@@ -9,21 +9,20 @@ public class Ticket {
     private final User user;
     private final int bookingReference;
     private final Movie movie;
-    private final String dateTime;
-    private final Theater theater;
+    private final String date;
+    private final int time;
     private final int showroomNumber;
     private final int seatNumber;
 
     //Constructor
-    public Ticket(Theater theater, Movie movie, User user, int showroomNumber, int seatNumber) {
-        this.theater = theater;
+    public Ticket(Movie movie, User user, int showroomNumber, int seatNumber, String date, int hour) {
         this.movie = movie;
         this.user = user;
         this.showroomNumber = showroomNumber;
         this.seatNumber = seatNumber;
+        this.date = date;
+        this.time = hour;
 
-        //Get current date and time
-        this.dateTime = new DateTime().getCurrentDateTime();
         this.bookingReference = generateReferenceNumber();
     }
 
@@ -48,8 +47,8 @@ public class Ticket {
                 "user=" + user.getUserName() +
                 ", bookingReference=" + bookingReference +
                 ", movie=" + movie.getMovieInfo() +
-                ", dateTime='" + dateTime + '\'' +
-//                ", theater=" + theater.getTheaterName() +
+                ", date='" + date + '\'' +
+                ", hour='" + time + '\'' +
                 ", showroomNumber=" + showroomNumber +
                 ", seatNumber=" + seatNumber +
                 '}';
@@ -64,10 +63,6 @@ public class Ticket {
 
     public User getUser() {
         return user;
-    }
-
-    public Theater getTheater() {
-        return theater;
     }
 
     public int getShowroomNumber() {
@@ -86,7 +81,11 @@ public class Ticket {
         return movie;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public String getDate() {
+        return date;
+    }
+
+    public int getTime() {
+        return time;
     }
 }

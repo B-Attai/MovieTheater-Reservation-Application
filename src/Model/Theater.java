@@ -7,25 +7,19 @@ package Model;
 import java.util.*;
 
 public class Theater {
+    private static Theater instance;
 
     // dates to ShowDates
     private HashMap<String, ShowDate> operationDates;
     private ArrayList<Movie> movieList;
-    private String theaterName;
+    private final String theaterName;
     private final double ticketPrice;
 
-    public Theater(ArrayList<Movie> movieList, HashMap<String, ShowDate> operationDates){
-        this.movieList = movieList;
-        this.operationDates = operationDates;
-        theaterName = "Calgary theater";
-        ticketPrice = 15.;
-    }
-
-    public Theater(ArrayList<Movie> movieList) {
-        this.movieList = movieList;
-        this.operationDates = new HashMap<>();
-        theaterName = "Calgary theater";
-        ticketPrice = 15.;
+    private Theater(){
+        operationDates = new HashMap<>();
+        movieList = new ArrayList<>();
+        theaterName = "Calgary Theater";
+        ticketPrice =15.;
     }
 
     public void reserveASeat(String movieName, String date, int hour, int showroomNumber, int seatNumber){
@@ -49,7 +43,7 @@ public class Theater {
     }
 
     public void addShowDate(ShowDate showDate){
-        this.operationDates.put(showDate.getDate(), showDate);
+        instance.operationDates.put(showDate.getDate(), showDate);
     }
 
     public ArrayList<Movie> getMovieList() {
@@ -102,5 +96,37 @@ public class Theater {
 
     public double getTicketPrice() {
         return ticketPrice;
+    }
+
+    public void makeBooking(Ticket ticket){
+        String movie = ticket.getMovie().getMovieName();
+        String date = ticket.getDate();
+        String time = ""+ticket.getTime();
+        int hour = ticket.getTime();
+        int roomNumber = ticket.getShowroomNumber();
+        int seatNumber = ticket.getSeatNumber();
+        this.operationDates.get(date).getShowTimeByMovie(movie).getShowRoomByHour(hour).getShowRoomsByNumber(roomNumber).bookASeat(seatNumber);
+    }
+
+    public void removeABooking(Ticket ticket){
+        String movie = ticket.getMovie().getMovieName();
+        String date = ticket.getDate();
+        String time = ""+ticket.getTime();
+        int hour = ticket.getTime();
+        int roomNumber = ticket.getShowroomNumber();
+        int seatNumber = ticket.getSeatNumber();
+        this.operationDates.get(date).getShowTimeByMovie(movie).getShowRoomByHour(hour).getShowRoomsByNumber(roomNumber).unbookASeat(seatNumber);
+    }
+
+    public static Theater getInstance() {
+        if (instance==null){
+            instance = new Theater();
+            return instance;
+        }
+        return instance;
+    }
+
+    public void setMovieList(ArrayList<Movie> movieList) {
+        this.movieList = movieList;
     }
 }

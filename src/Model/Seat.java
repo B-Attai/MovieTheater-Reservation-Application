@@ -56,4 +56,18 @@ public class Seat {
     public void setState(int state) {
         this.state = state;
     }
+
+    public void bookSeat(){
+        if (state==1){
+            throw new IllegalCallerException("Seat is already taken");
+        }
+        state = 1;
+    }
+
+    public void unbookSeat(){
+        if (state==0){
+            throw new IllegalCallerException("No booking found on the seat");
+        }
+        state = 0;
+    }
 }

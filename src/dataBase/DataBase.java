@@ -7,13 +7,12 @@ import java.util.ArrayList;
 public class DataBase {
 
     private final ArrayList<Movie> movies;
-    private final Theater theater;
     private final ArrayList<User> users;
     private final ArrayList<Ticket> tickets;
 
     public DataBase(){
         this.movies = loadFromMovieDB();
-        this.theater = setupTheater();
+        setupTheater();
         this.users = loadUserDB();
         this.tickets = loadTicketDB();
     }
@@ -70,16 +69,19 @@ public class DataBase {
     }
 
     private ArrayList<Ticket> loadTicketDB(){
+        Payment payment = Payment.getInstance();
+
         ArrayList<Ticket> tickets = new ArrayList<>();
 
-        tickets.add(new Ticket(theater, movies.get(0), users.get(0), 1, 1));
-        tickets.add(new Ticket(theater, movies.get(0), users.get(0), 1, 3));
-        tickets.add(new Ticket(theater, movies.get(0), users.get(1), 1, 2));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 1, "12-12-21", 12));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 3, "12-12-21", 12));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "12-12-21", 12));
 
         return tickets;
     }
 
-    private static Theater setupTheater(){
+    private void setupTheater(){
+        System.out.println("setupTheater");
         TheaterShowRooms tshr = new TheaterShowRooms(12, loadFromShowroomDB());
 
         ShowTime sh1 = new ShowTime("12-12-21");
@@ -88,18 +90,11 @@ public class DataBase {
         ShowDate shd = new ShowDate("12-12-21");
         shd.addShow("James Bond", sh1);
 
-        Theater theater = new Theater(loadFromMovieDB());
-        theater.addShowDate(shd);
-
-        return theater;
+        Theater.getInstance().addShowDate(shd);
     }
 
     public ArrayList<Movie> getMovies() {
         return movies;
-    }
-
-    public Theater getTheater() {
-        return theater;
     }
 
     public ArrayList<User> getUsers() {

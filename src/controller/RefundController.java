@@ -1,8 +1,8 @@
-package TheaterControllers;
+package controller;
 
 import Model.Payment;
 import Model.Ticket;
-import TheaterView.Ticket_UI;
+import view.Ticket_UI;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class RefundController {
 			instance.setTicketDB(ticketDB);
 			int ticketRefNo = Integer.parseInt(view.getTicketID());
 			try {
-//				instance.performRefund(ticketRefNo, 5);
+				instance.performRefund(ticketRefNo);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

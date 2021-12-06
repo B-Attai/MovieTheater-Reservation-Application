@@ -1,8 +1,8 @@
-package TheaterControllers;
+package controller;
 
 import Model.Ticket;
 import Model.User;
-import TheaterView.Ticket_UI;
+import view.Ticket_UI;
 
 import java.util.ArrayList;
 

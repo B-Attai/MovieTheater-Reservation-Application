@@ -1,8 +1,8 @@
-package TheaterControllers;
+package controller;
 
 import Model.User;
-import TheaterView.Login_UI;
-import TheaterView.Menu_UI;
+import view.Login_UI;
+import view.Menu_UI;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -66,6 +66,10 @@ public class LoginController {
 
 	public void setUsersDB(ArrayList<User> usersDB) {
 		this.usersDB = usersDB;
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
 	}
 
 	private User checkUser(User user){

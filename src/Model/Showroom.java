@@ -40,18 +40,14 @@ public class Showroom {
 
     //Book a seat and change the seat state
     public void bookASeat(int seatNumber){
-        if (seatList.get(seatNumber-1).getState() ==1){
-            System.out.println("seat is booked");
-            throw new IllegalCallerException("Seat is already booked");
-        }
-        seatList.get(seatNumber-1).setState(1); // -1 for the 0 index on the seatList
+        seatList.get(seatNumber-1).bookSeat(); // -1 for the 0 index on the seatList
         System.out.println("Seat " + seatNumber + " booked!");
     }
 
     //Unbook a seat and change the seat state
     //TODO: Needs to be implemented in Payment/Theater
     public void unbookASeat(int seatNumber){
-        seatList.get(seatNumber-1).setState(0); // -1 for the 0 index on the seatList
+        seatList.get(seatNumber-1).unbookSeat(); // -1 for the 0 index on the seatList
         System.out.println("Seat " + seatNumber + " unbooked!");
     }
 

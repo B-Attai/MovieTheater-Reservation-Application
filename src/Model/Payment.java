@@ -33,25 +33,13 @@ public class Payment{
         setPaymentStrategy(paymentStrategy);
     }
 
-    //Book a ticket and add to ticket database, returns the generated Ticket object
-//    public Ticket generateTicket(String userInfo, String movieName, int showroomNumber, int seatNumber){
-//
-//        // Theater singleton?
-//        Theater theater = Theater.getInstance();
-//        setTheater(theater);
-//        String bookingReference =  this.theater.bookASeat(movieName, showroomNumber, seatNumber);
-//        String bookingInfo = theater.getABooking(bookingReference);
-//        Ticket aTicket = new Ticket(userInfo, theater.getTheaterName(), bookingReference, bookingInfo);
-//        ticketDB.add(aTicket);
-//        return aTicket;
-//    }
-
     // Version Amir
-    public Ticket generateTicket(Theater theater, Movie movie, User user, int showroomNumber, int seatNumber){
-//        Checking the logic of theater occupancy
+    public Ticket generateTicket(Movie movie, User user, int showroomNumber, int seatNumber, String date, int hour){
+        Ticket aTicket = new Ticket(movie, user, showroomNumber, seatNumber, date, hour);
+        Theater.getInstance().makeBooking(aTicket);
 
-        Ticket aTicket = new Ticket(theater, movie, user, showroomNumber, seatNumber);
-        ticketDB.add(aTicket);
+        // Then adding to the database
+//        ticketDB.add(aTicket);
         return aTicket;
     }
 
@@ -65,26 +53,26 @@ public class Payment{
     //Apply the refund strategy depending on the user
     //Note: Split ticket and booking separated
     //TODO: Verify time between booking reference and the current time to process refund
-//    public void performRefund(int bookingReference, double amount) throws Exception {
-//        for(Ticket ticket : ticketDB) {
-//        System.out.println("TEST: " + (ticket.getBookingReference() == bookingReference));
-//            if (ticket.getBookingReference() == bookingReference){
-//                System.out.println("Ticket found!");
-//                removeTicket(ticket.getBookingReference());
-//                ticket.getTheater().removeABooking(bookingReference);
-//
-//                if (ticket.getUser().getUserType().equals("Registered")) {
-//                    setRefundStrategy(new RegisterUserRefund());
-//                } else {
-//                    setRefundStrategy(new RegularUserRefund());
-//                }
-//                refundStrategy.refund(amount);
-//                return;
-//            }
-//            // Ticket does not exist
-//            throw new Exception("Ticket not found");
-//        }
-//    }
+    public void performRefund(int bookingReference) throws Exception {
+        for(Ticket ticket : ticketDB) {
+        System.out.println("TEST: " + (ticket.getBookingReference() == bookingReference));
+            if (ticket.getBookingReference() == bookingReference){
+                System.out.println("Ticket found!");
+                Theater.getInstance().removeABooking(ticket);
+                removeTicket(ticket.getBookingReference());
+
+                if (ticket.getUser().getUserType().equals("Registered")) {
+                    setRefundStrategy(new RegisterUserRefund());
+                } else {
+                    setRefundStrategy(new RegularUserRefund());
+                }
+                refundStrategy.refund(Theater.getInstance().getTicketPrice());
+                return;
+            }
+            // Ticket does not exist
+            throw new Exception("Ticket not found");
+        }
+    }
 
     //TODO: implement functionality to check the time is within 72 hours.
     public boolean verifyTime(Ticket ticket){

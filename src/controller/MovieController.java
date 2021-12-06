@@ -1,9 +1,10 @@
-package TheaterControllers;
+package controller;
 
 import Model.Movie;
 import Model.Theater;
-import TheaterView.Movie_UI;
-import TheaterView.Ticket_UI;
+import Model.User;
+import view.Movie_UI;
+import view.Ticket_UI;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,14 +14,16 @@ public class MovieController {
 	private Ticket_UI nextview;
 	private ArrayList<Movie> movieDB;
 	private Theater theater;
+	private LoginController currentUserController;
 
 	private String showtimestring;
 	
-	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB, Theater theater) {
+	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB, LoginController userCntrl) {
 		view = mainWindow;
 		nextview = ticketWindow;
 		this.movieDB = movieDB;
-		this.theater = theater;
+		this.theater = Theater.getInstance();
+		this.currentUserController = userCntrl;
 		// ---------------------------------- First View -----------------------------------------------//
 		// If Search is press (from first view)
 		/*
@@ -190,8 +193,11 @@ public class MovieController {
 			// Display Ticket Buy UI
 			view.setVisible(false);
 			// Ticket controller needs to be called and populate the ticket UI
-			
-			nextview.populateTicket("Michael", "0010", "Spiderman Far from home", "7pm Saturday", "14$", "17th December");
+
+			String date = showtimestring.split(" ")[0];
+			String time = showtimestring.split(" ")[1];
+			User user = currentUserController.getCurrentUser();
+			nextview.populateTicket(user.getUserName(), "0010", view.getMovienameInput(), time+":00", String.valueOf(theater.getTicketPrice()), date);
 			// Basically pass those from each model populateTicket(String name, String ticket, String moviename, String Showtime, String Cost, String Date) 
 			nextview.printReceiptButton.setVisible(true);
 			nextview.setVisible(true);
@@ -199,17 +205,6 @@ public class MovieController {
 
 		});
 	}
-
-//	private ArrayList<Movie> findMovies(String  movie){
-//		ArrayList<Movie> movies = new ArrayList<>();
-//		for (Movie m:movieDB){
-//			if (m.getMovieName().equals(movie)){
-//				System.out.println(m);
-//				movies.add(m);
-//			}
-//		}
-//		return movies;
-//	}
 
 	private ArrayList<Movie> findMovies(String  movie){
 		ArrayList<Movie> movies = new ArrayList<>();
