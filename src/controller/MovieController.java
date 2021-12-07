@@ -220,8 +220,13 @@ public class MovieController {
 			String date = showtimestring.split(" ")[0];
 			String time = showtimestring.split(" ")[1];
 			User user = currentUserController.getCurrentUser();
-			nextview.populateTicket(user.getUserName(),  ""+newTicket.getBookingReference(), view.getMovienameInput(), time+":00", String.valueOf(theater.getTicketPrice()), date);
-			// Basically pass those from each model populateTicket(String name, String ticket, String moviename, String Showtime, String Cost, String Date) 
+			try {
+				nextview.populateTicket(user.getUserName(), "" + newTicket.getBookingReference(), view.getMovienameInput(), time + ":00", String.valueOf(theater.getTicketPrice()), date);
+			}catch (Exception ex){
+				ex.getMessage();
+				return;
+			}
+			// Basically pass those from each model populateTicket(String name, String ticket, String moviename, String Showtime, String Cost, String Date)
 			nextview.printReceiptButton.setVisible(true);
 			nextview.setVisible(true);
 		});
