@@ -7,48 +7,39 @@ import view.Ticket_UI;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * Refund controller class to handle processing of the refund and displaying the refunded
+ * receipt to the user. The class used the UI and the ticket database to process a refund
+ * interacting with the payment system and the ticket.
+ * @author Amir Abbaspour , Brandon Attai, Michael Ah-Kiow
+ */
 public class RefundController {
-//	private final ArrayList<Ticket> ticketDB;
 	private Ticket_UI view;
+
+	/**
+	 * Refund Controller constructor that has an action listener to determine if the
+	 * refund button is pressed. If it is pressed, the ticket is obtained and the refund is processed.
+	 *
+	 * @param ticketwindow The ticket window that allows the user to input a ticket.
+	 * @param ticketDB The ticket db to query and remove a ticket.
+	 */
 	public RefundController(Ticket_UI ticketwindow, ArrayList<Ticket> ticketDB) {
-		view = ticketwindow;
-//		this.ticketDB = ticketDB;
-		
-		view.addRequestListener(e ->{
-			System.out.println("Print Receipt pressed - This is lcoated in Refund Controller!!");
-			
-			// There are getters in the class! Every thing is set
-			// Change the type as needed I just used string as illustration
-//			String username, ticketid, movie, showtime, cost,date;
-//			
-//			username = view.getName();
-//			ticketid = view.getTicketID();
-//			movie = view.getMovie();
-//			showtime = view.getShowtime();
-//			cost = view.getCost();
-//			date = view.getDate();
+		view = ticketwindow; //Ticket window
+		view.addRequestListener(e ->{ //Action Listener
 			Payment instance = Payment.getInstance();
 			instance.setTicketDB(ticketDB);
-			int ticketRefNo = Integer.parseInt(view.getTicketID());
+			int ticketRefNo = 0;
+			try { //Error handling for no input on ticket field
+				ticketRefNo = Integer.parseInt(view.getTicketID());
+			}catch (Exception ex){
+				JOptionPane.showMessageDialog(null, "No ticket entered. Please try again", "ERROR" ,JOptionPane.PLAIN_MESSAGE);
+			}
 			try {
 				double amountReturned = instance.performRefund(ticketRefNo);
 				JOptionPane.showMessageDialog(null, "Refund successful.\nAmount: " + amountReturned + '$', "Successful banking operation" ,JOptionPane.PLAIN_MESSAGE);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR" ,JOptionPane.PLAIN_MESSAGE);
-				ex.printStackTrace();
 			}
-
-
 		});
 	}
-
-//	private Ticket findTicket(int ticketId){
-//		for(Ticket t:ticketDB){
-//			if (t.getBookingReference() == ticketId){
-//				return t;
-//			}
-//		}
-//		return null;
-//	}
-
 }
