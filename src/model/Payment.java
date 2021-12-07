@@ -102,9 +102,9 @@ public class Payment{
 
             for (Ticket ticket : ticketDB) {
                 if (ticket.getBookingReference() == bookingReference) {
+                    verifyTime(ticket);
                     Theater.getInstance().removeABooking(ticket);
                     removeTicket(ticket.getBookingReference());
-                    verifyTime(ticket);
                     if (ticket.getUser().getUserType().equals("Registered")) {
                         setRefundStrategy(new RegisterUserRefund());
                     } else {
