@@ -64,7 +64,6 @@ public class Theater {
     }
 
     public ArrayList<Integer> returnShowrooms(String movieName, String dateTime){
-        ArrayList<Integer> myResult = new ArrayList<>();
         String showDate = dateTime.split(" ")[0];
         int showtime = Integer.parseInt(dateTime.split(" ")[1]);
 
@@ -76,11 +75,10 @@ public class Theater {
             TheaterShowRooms tshr = existingTime.getShowRoomByHour(showtime);
             return tshr.getShowRoomsNumbers();
         }
-        return myResult;
+        throw new NoSuchElementException("No available show room");
     }
 
     public ArrayList<Integer> returnRoomNumbers(String movieName, String dateTime, int showRoomNumber){
-        ArrayList<Integer> myResult = new ArrayList<>();
         String showDate = dateTime.split(" ")[0];
         int showtime = Integer.parseInt(dateTime.split(" ")[1]);
 
@@ -92,8 +90,7 @@ public class Theater {
             TheaterShowRooms tshr = existingTime.getShowRoomByHour(showtime);
             return tshr.getShowRoomNumbers(showRoomNumber);
         }
-        System.out.println(myResult);
-        return myResult;
+        throw new NoSuchElementException("No available room");
     }
 
     public double getTicketPrice() {
