@@ -38,7 +38,7 @@ public class LoginController {
 			}
 			
 			// Prompt News
-			JOptionPane.showMessageDialog(null,"Movie Update: Home Alone in Theaters on December 17th!!", "Latest News for Registered User!",JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Movie Update: Home Alone in Theaters on December 25!!", "Latest News for Registered User!",JOptionPane.PLAIN_MESSAGE);
 			
 			// Removing the view
 			loginView.setVisible(false);
