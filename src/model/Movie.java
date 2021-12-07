@@ -1,13 +1,18 @@
 package model;
 
+import view.Menu_UI;
+
 public class Movie {
 
     private String movieName;
     private String movieInfo;
+    private String announcementDate;
 
     //Test Constructor
-    public Movie(String movieName) {
+    public Movie(String movieName, String announcementDate) {
+
         setMovieName(movieName);
+        setAnnouncementDate(announcementDate); //ADDED 2021-12-06
     }
 
 
@@ -31,5 +36,13 @@ public class Movie {
     public String toString() {
         return movieName;
 
+    }
+
+    public String getAnnouncementDate() {
+        return announcementDate;
+    }
+
+    public void setAnnouncementDate(String announcementDate) {
+        this.announcementDate = announcementDate;
     }
 }

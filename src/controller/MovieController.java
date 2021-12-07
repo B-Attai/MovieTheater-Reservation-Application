@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import view.Menu_UI;
 import view.Movie_UI;
 import view.Ticket_UI;
 
@@ -14,16 +15,19 @@ public class MovieController {
 	private Theater theater;
 	private LoginController currentUserController;
 	TicketController ticketController;
+	Menu_UI menuView;
+
 
 	private String showtimestring;
 	
-	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB, LoginController userCntrl, TicketController ticketController) {
+	public MovieController(Movie_UI mainWindow, Ticket_UI ticketWindow, ArrayList<Movie> movieDB, LoginController userCntrl, TicketController ticketController, Menu_UI menuWindow) {
 		view = mainWindow;
 		nextview = ticketWindow;
 		this.movieDB = movieDB;
 		this.theater = Theater.getInstance();
 		this.currentUserController = userCntrl;
 		this.ticketController = ticketController;
+		menuView = menuWindow;
 		// ---------------------------------- First View -----------------------------------------------//
 		// If Search is press (from first view)
 		/*
@@ -52,9 +56,12 @@ public class MovieController {
 			for (Movie m:findMovies(movie)){
 				model.addElement(m);
 			}
-			view.movielist.setModel(model);
-
-
+//			if(model.firstElement().getAnnouncementDate().isEmpty()) {
+				view.movielist.setModel(model);
+//			}else if(userCntrl.currentUser.getUserType().equals("Registered") &&
+//					model.firstElement().getAnnouncementDate().isEmpty() == false){
+//
+//			}
 		});
 		
 		// ---------------------------------- 2nd View -----------------------------------------------//
@@ -198,8 +205,17 @@ public class MovieController {
 			// Display Ticket Buy UI
 			view.setVisible(false);
 			// Ticket controller needs to be called and populate the ticket UI
+			if (newTicket != null) {
 
-			ticketController.setTicket(newTicket);
+				System.out.println("setting new ticket");
+				ticketController.setTicket(newTicket);
+			}else{
+				JOptionPane.showMessageDialog(null,
+						"Sorry this cannot be purchased due to greater than 10% of seats being sold.",
+						"Error" ,
+						JOptionPane.PLAIN_MESSAGE);
+						menuView.setVisible(true);
+			}
 
 			String date = showtimestring.split(" ")[0];
 			String time = showtimestring.split(" ")[1];
@@ -208,8 +224,6 @@ public class MovieController {
 			// Basically pass those from each model populateTicket(String name, String ticket, String moviename, String Showtime, String Cost, String Date) 
 			nextview.printReceiptButton.setVisible(true);
 			nextview.setVisible(true);
-
-
 		});
 	}
 
@@ -224,4 +238,11 @@ public class MovieController {
 		return movies;
 	}
 
+	public ArrayList<Movie> getMovieDB() {
+		return movieDB;
+	}
+
+	public void setMovieDB(ArrayList<Movie> movieDB) {
+		this.movieDB = movieDB;
+	}
 }

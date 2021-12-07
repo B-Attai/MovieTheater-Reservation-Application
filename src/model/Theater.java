@@ -127,4 +127,8 @@ public class Theater {
     public void setMovieList(ArrayList<Movie> movieList) {
         this.movieList = movieList;
     }
+
+    public HashMap<String, ShowDate> getOperationDates(){
+        return operationDates;
+    }
 }

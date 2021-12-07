@@ -1,6 +1,7 @@
 package app;
 
 import controller.*;
+import model.Movie;
 import view.Login_UI;
 import view.Menu_UI;
 import view.Movie_UI;
@@ -32,7 +33,9 @@ public class GUIApp {
 		// Creating Controllers (NOTE BACKEND PEOPLE NEED TO PASS IN MODEL AS WELL, FOR NOW JUST PASSING IN UI to TEST UI LOGIC)
 		LoginController logincontroller = new LoginController(loginWindow, menuWindow, theaterDatabase.getUsers());
 		TicketController ticketcontroller = new TicketController(ticketWindow, theaterDatabase.getTickets());
-		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow, theaterDatabase.getMovies(), logincontroller, ticketcontroller);
+		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow, theaterDatabase.getMovies(), logincontroller, ticketcontroller, menuWindow);
+
+//		moviecontroller.getMovieDB().add(new Movie("Test"));
 
 
 		MenuController menucontroller = new MenuController(loginWindow, menuWindow, movieWindow, ticketWindow);

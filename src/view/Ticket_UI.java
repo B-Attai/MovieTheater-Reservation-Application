@@ -40,6 +40,7 @@ public class Ticket_UI extends JFrame {
 		username.setBounds(222, 97, 120, 22);
 		contentPane.add(username);
 		username.setColumns(10);
+		username.setEditable(false);
 		
 		JLabel lblNewLabel_1 = new JLabel("TicketID");
 		lblNewLabel_1.setBounds(103, 137, 94, 22);
@@ -57,6 +58,7 @@ public class Ticket_UI extends JFrame {
 		movie = new JTextField();
 		movie.setColumns(10);
 		movie.setBounds(222, 179, 120, 22);
+		movie.setEditable(false);
 		contentPane.add(movie);
 		
 		JLabel lblNewLabel_3 = new JLabel("Showtime");
@@ -66,6 +68,7 @@ public class Ticket_UI extends JFrame {
 		showtime = new JTextField();
 		showtime.setColumns(10);
 		showtime.setBounds(222, 222, 120, 22);
+		showtime.setEditable(false);
 		contentPane.add(showtime);
 		
 		JLabel lblNewLabel_4 = new JLabel("Cost");
@@ -75,6 +78,7 @@ public class Ticket_UI extends JFrame {
 		cost = new JTextField();
 		cost.setColumns(10);
 		cost.setBounds(222, 265, 120, 22);
+		cost.setEditable(false);
 		contentPane.add(cost);
 		
 		JLabel lblNewLabel_5 = new JLabel("Date");
@@ -84,6 +88,7 @@ public class Ticket_UI extends JFrame {
 		date = new JTextField();
 		date.setColumns(10);
 		date.setBounds(222, 308, 120, 22);
+		date.setEditable(false);
 		contentPane.add(date);
 		
 		requestRefundButton = new JButton("Request Refund");

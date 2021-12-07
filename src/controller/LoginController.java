@@ -30,6 +30,7 @@ public class LoginController {
 			// Backend logic stuffs.
 			User u = new User(username, password);
 			currentUser = checkUser(u);
+//			showAnnouncement(currentUser);
 
 			if (currentUser==null){
 				JOptionPane.showMessageDialog(null, "Username or password is invalid.\nPlease try again", "LoginError" ,JOptionPane.PLAIN_MESSAGE);
@@ -37,7 +38,7 @@ public class LoginController {
 			}
 			
 			// Prompt News
-//			JOptionPane.showMessageDialog(null,"Movie Update: Spiderman No Way Home in Theaters on December 17th!!", "Latest News for Registered User!",JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Movie Update: Home Alone in Theaters on December 17th!!", "Latest News for Registered User!",JOptionPane.PLAIN_MESSAGE);
 			
 			// Removing the view
 			loginView.setVisible(false);
@@ -63,6 +64,11 @@ public class LoginController {
 		
 	}
 
+//	public void showAnnouncement(User user){
+//		if(user!= null)
+//			JOptionPane.showMessageDialog(null, "There is a new movie, you can purchase now!", "Announcement!" ,JOptionPane.PLAIN_MESSAGE);
+//	}
+
 
 	public void setUsersDB(ArrayList<User> usersDB) {
 		this.usersDB = usersDB;
@@ -75,6 +81,7 @@ public class LoginController {
 	private User checkUser(User user){
 		for (User u: usersDB){
 			if (u.equals(user)){
+
 				return u;
 			}
 		}

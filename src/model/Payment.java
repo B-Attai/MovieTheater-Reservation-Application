@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,16 +37,27 @@ public class Payment{
         setPaymentStrategy(paymentStrategy);
     }
 
-    // Version Amir
-    public Ticket generateTicket(Movie movie, User user, int showroomNumber, int seatNumber, String date, int hour){
+    // Version Amir //MODIFIED
+    public Ticket generateTicket(Movie movie, User user, int showroomNumber, int seatNumber, String date, int hour) {
         Ticket aTicket = new Ticket(movie, user, showroomNumber, seatNumber, date, hour);
-        Theater.getInstance().makeBooking(aTicket);
-
+        try {
+            if(movie.getAnnouncementDate().isEmpty() == false){
+                if (verifyEarlyPurchase(movie, aTicket, user) == true) {
+                Theater.getInstance().makeBooking(aTicket);
+                return aTicket;
+            }
+            }else if(movie.getAnnouncementDate().isEmpty() == true){
+                Theater.getInstance().makeBooking(aTicket);
+                return aTicket;
+            }else{
+                System.out.println("Couldn't book a ticket"); //MODIFIED
+            }
+        } catch (ParseException pe) {
+            System.out.println("Book a ticket exception caught" + pe); //MODIFIED
+        }
         // Then adding to the database
-//        ticketDB.add(aTicket);
-        return aTicket;
+        return null;
     }
-
 
     //Perform a transaction using Payment strategy
     public boolean performTransaction(long accountID, double amount){
@@ -92,6 +104,38 @@ public class Payment{
         }
     }
 
+    //MODIFIED
+    public boolean verifyEarlyPurchase(Movie theMovie, Ticket ticket, User user) throws ParseException {
+
+        String movie = ticket.getMovie().getMovieName();
+        String date = ticket.getDate();
+        int hour = ticket.getTime();
+        int roomNumber = ticket.getShowroomNumber();
+        ArrayList<Seat> seatList = Theater.getInstance().getOperationDates().get(date).getShowTimeByMovie(movie).getShowRoomByHour(hour).getShowRoomsByNumber(roomNumber).getSeatList();
+
+        double counter = 0;
+        for (Seat s : seatList) {
+            if (s.getState() == 1) {
+                counter++;
+            }
+        }
+
+        String theDate = theMovie.getAnnouncementDate();
+        String dateTimeAnnouncement = theDate + " " + "00:00:00";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Date currentDate = new Date();
+
+        Date date1 = formatter.parse(dateTimeAnnouncement);
+
+        if (date1.getDate() - currentDate.getDate() <= 0 ||
+                ((counter / seatList.size() > 0.1) == true) &&
+                (user.getUserType() == "Registered")) {
+            System.out.println((date1.getDate() - currentDate.getDate()));
+            return false;
+        }
+        return true;
+    }
+
     //Remove ticket in-place while iterating the list
     public boolean removeTicket(int bookingReference) {
         Iterator<Ticket> itr = ticketDB.iterator();
@@ -106,7 +150,6 @@ public class Payment{
         System.out.println("Removing from removeTicket! - FALSE VALUE");
         return false;
     }
-
 
     //Payment Strategies
     public void setPaymentStrategy(PaymentStrategy paymentStrategy){
