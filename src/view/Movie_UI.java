@@ -8,6 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+/**
+ * @author micde
+ * UI for selecting a movie, choosing a time and selecting a seat.
+ * This UI is reponsible for the core of the application.
+ * The UI is called By Login Controller then movie controller takes over.
+ * The controller reponsible for sequebnce, logic, saving data..etc is movie controller.
+ * 
+ */
 public class Movie_UI extends JFrame {
 
 	private JPanel contentPane;
@@ -171,84 +179,50 @@ public class Movie_UI extends JFrame {
 		
 		ConfirmationSummaryTextArea = new JTextArea();
 		ConfirmationSummaryTextArea.setBounds(52, 33, 316, 157);
-		buyPanel.add(ConfirmationSummaryTextArea);
-		buyButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		
-		// Next Page Listeners
-		// These listeners should be in the UI (and not in the controller) since they are just changing pages
-		// The controller s hould listen to the Buy seat
-		
-		
-		// This should query and display all movies according to that list
-		// Update or set text in 
-//		searchButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//			}
-//		});
-//		
-//		movieButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				layeredPanel.removeAll();
-//				layeredPanel.add(showtimePanel);
-//				showtimePanel.setVisible(true);
-//				layeredPanel.repaint();
-//			}
-//		});
-//		
-//		
-//		showtimeButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				layeredPanel.removeAll();
-//				layeredPanel.add(seatPanel);
-//				seatPanel.setVisible(true);
-//				layeredPanel.repaint();
-//			}
-//		});
-//		
-//		seatButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				layeredPanel.removeAll();
-//				layeredPanel.add(buyPanel);
-//				buyPanel.setVisible(true);
-//				layeredPanel.repaint();
-//			}
-//		});
-//		
-//		buyButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-////				Make controller get everything
-//			}
-//		});
+		buyPanel.add(ConfirmationSummaryTextArea);	
+
 	}
 	
 	
 	
 	// Getters and Setters
+	/**
+	 * String Getter
+	 * @return Movie Name
+	 */
 	public String getMovienameInput() {
 		return movienameInput.getText();
 	}
-	
+	/**
+	 * Getter
+	 * @return Movie Selection
+	 */
 	public String getMovieSelection() {
 		return movielist.getSelectedValue().toString();
 //		return movielist.getSelectedIndex();
 		
 	}
 
+	/** Getter
+	 * @return selected showtime
+	 */
 	public String getSelectedShowtime() {
 		return showtimeList.getSelectedValue().toString();
 //		return showtimeList.getSelectedIndex();
 	}
 
 	// Return Selected Row of seats
+	/**
+	 * @return Row of seat (int)
+	 */
 	public int getRoomComboBoxInput() {
 		return Integer.parseInt(Objects.requireNonNull(RoomComboBoxInput.getSelectedItem()).toString());
 	}
 	
 	// Return column of seat
+	/**
+	 * @return col of seat (int)
+	 */
 	public int getSeatComboBoxInput() {
 		return Integer.parseInt(Objects.requireNonNull(SeatComboBoxInput.getSelectedItem()).toString());
 //		return SeatComboBoxInput.getSelectedIndex();
@@ -257,38 +231,48 @@ public class Movie_UI extends JFrame {
 	
 
 	//--------------------------------------- Listeners---------------------------------------------------//
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Search for movie Button
+	 */
 	public void addSearchListener(ActionListener listener) {
 		searchButton.addActionListener(listener);
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Movie Button
+	 */
 	public void addConfirmSelectionListener(ActionListener listener) {
 		movieButton.addActionListener(listener);
-		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Showtime Button
+	 */
 	public void addShowtimeListener(ActionListener listener) {
 		showtimeButton.addActionListener(listener);
-		// TODO Auto-generated method stub
-		
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Seat Button
+	 */
 	public void addConfirmSeatListener(ActionListener listener) {
 		seatButton.addActionListener(listener);
-		// TODO Auto-generated method stub
-		
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to ShowSeatButton
+	 */
 	public void addShowAvailableSeatListener(ActionListener listener) {
 		ShowSeats.addActionListener(listener);
-		// TODO Auto-generated method stub
-		
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Buy Button
+	 */
 	public void addConfirmListener(ActionListener listener) {
 		buyButton.addActionListener(listener);
-		// TODO Auto-generated method stub
-		
 	}
 
 

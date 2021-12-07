@@ -6,6 +6,13 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Simple UI that is shared by both Refund and show receipt use cases.
+ * The Movie controller will call this UI and populate the UI based on the entered data
+ * Alternatively for a refund, everything will be empty and hte user will ahve to enter information for refund.
+ * @author micde
+ *
+ */
 public class Ticket_UI extends JFrame {
 
 	private JPanel contentPane;
@@ -119,29 +126,54 @@ public class Ticket_UI extends JFrame {
 	}
 	
 	// Getter for request ticket, User will hav ean empty ticket ui and needs to fill info!
+	/**
+	 * @return Username if registered user
+	 */
 	public String getUsername() {
 		return username.getText();
 	}
+	/**
+	 * @return Ticket ID used for refund and keeping track
+	 */ 
 	public String getTicketID() {
 		return ticketID.getText();
 	}
+	/**
+	 * @return Movie Name (string)
+	 */
 	public String getMovie() {
 		return movie.getText();
 	}
+	/**
+	 * @return Selected Showtime (string)
+	 */
 	public String getShowtime() {
 		return showtime.getText();
 	}
+	/**
+	 * @return Cost (string)
+	 */
 	public String getCost() {
 		return cost.getText();
 	}
+	/** 
+	 * @return date used.
+	 */
 	public String getDate() {
 		return date.getText();
 	}
 	// Listeners
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Print Receipt Button
+	 */
 	public void addPrintReceiptListener(ActionListener listener) {
 		printReceiptButton.addActionListener(listener);
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Request Refund Button
+	 */
 	public void addRequestListener(ActionListener listener) {
 		requestRefundButton.addActionListener(listener);
 	}

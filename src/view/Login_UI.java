@@ -12,6 +12,14 @@ import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
+/**
+ * Simple UI that is used for login
+ * Registered user will have a prmopt showing the latest news (only for registered user)
+ * Guests don't have to enter any information to continue
+ * The login controller is reponsible for calling the getters ands etters and listening to the button clicks.
+ * @author micde
+ *
+ */
 public class Login_UI extends JFrame {
 
 	private JPanel contentPane;
@@ -72,18 +80,7 @@ public class Login_UI extends JFrame {
 		passwordLabel.setBounds(136, 109, 72, 14);
 		contentPane.add(passwordLabel);
 		
-		Login = new JButton("Login");
-		
-		// When Button is pressed 
-//		Login.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				JOptionPane.showMessageDialog(null,"Movie Update: Spiderman No Way Home in Theaters on December 17th!!", "Latest News for Registered User!",JOptionPane.PLAIN_MESSAGE);
-//				setVisible(false);
-//				Movie_UI frame = new Movie_UI();
-//				frame.setVisible(true);
-//			}
-//		});
-		
+		Login = new JButton("Login");		
 		Login.setBounds(105, 186, 89, 23);
 		contentPane.add(Login);
 		
@@ -97,20 +94,38 @@ public class Login_UI extends JFrame {
 		contentPane.add(separator);
 	}
 
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Login Button
+	 */
 	public void addLoginListener(ActionListener listener) {
 		Login.addActionListener(listener);
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Guest Login Button
+	 */
 	public void addGuestListener(ActionListener listener) {
 		ContinueAsGuest.addActionListener(listener);
 	}
+
+	/**
+	 * Getter for Username
+	 * @return String username
+	 */
 	public String getUsernameInput() {
 		return usernameInput.getText();
 	}
+	/** Getter for password
+	 * @return String Password
+	 */
 	public String getPasswordInput() {
 		return passwordInput.getText();
 	}
 	
+	/**
+	 * Reset Text/Window
+	 */
 	public void clearall() {
 		usernameInput.setText("");
 		passwordInput.setText("");

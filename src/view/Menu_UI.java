@@ -9,6 +9,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 
 
+/**
+ * @author micde
+ * Class for Menu (Option selector) after user logins
+ * Allows for 3 options, go back to login, request a refund or buy a movie.
+ * Menu Controllers is responsible for handling events and calling getters/setters
+ */
 public class Menu_UI extends JFrame {
 
 	private JPanel contentPane;
@@ -59,17 +65,26 @@ public class Menu_UI extends JFrame {
 		
 	}
 	// Event Listeners
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Login Button
+	 */
 	public void addLoginListener(ActionListener listener) {
 		goBackButton.addActionListener(listener);
-		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Buy Button
+	 */
 	public void addMovieListener(ActionListener listener) {
 		buyButton.addActionListener(listener);
 		
 	}
-
+	/**
+	 * @param listener: Action listener from controller to attach to Button
+	 * Add A listener to Refund Button
+	 */
 	public void addRefundListener(ActionListener listener) {
 		RefundButton.addActionListener(listener);
 		
