@@ -176,7 +176,7 @@ public class Payment{
         Date date1 = formatter.parse(dateTimeAnnouncement);
 
         //Check if the user can purchase the early announcement movie and seats sold < 10%
-        if (date1.getDate() - currentDate.getDate() <= 0 ||
+        if (date1.getDate() - currentDate.getDate() >= 0 ||
                 ((counter / seatList.size() > 0.1) == true) &&
                 (user.getUserType() == "Registered")) {
             return false;

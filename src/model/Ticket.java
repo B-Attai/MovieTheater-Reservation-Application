@@ -43,15 +43,15 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" +
-                "user=" + user.getUserName() +
-                ", bookingReference=" + bookingReference +
-                ", movie=" + movie.getMovieName() +
-                ", date='" + date + '\'' +
-                ", hour='" + time + '\'' +
-                ", showroomNumber=" + showroomNumber +
-                ", seatNumber=" + seatNumber +
-                '}';
+        return "Ticket: \n" +
+                "User: " + user.getUserName() +
+                ", Booking Reference" + bookingReference +
+                ", Movie: " + movie.getMovieName() +
+                ", Date: " + date +
+                ", Hour: " + time +
+                ", Showroom Number: " + showroomNumber +
+                ", Seat Number: " + seatNumber +
+                '.';
     }
 
 
