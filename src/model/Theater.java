@@ -85,6 +85,7 @@ public class Theater {
         int showtime = Integer.parseInt(dateTime.split(" ")[1]);
 
         for (ShowDate shd:operationDates.values()){
+            if (shd.getShowTimeByMovie(movieName) == null) continue;
             ShowTime existingTime = shd.getShowTimeByMovie(movieName);
             if (!existingTime.getDate().equals(showDate)) continue;
 
