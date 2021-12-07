@@ -110,7 +110,7 @@ public class DataBase {
 
         Theater.getInstance().addShowDate(shd1);
         Theater.getInstance().addShowDate(shd2);
-//        Theater.getInstance().addShowDate(shd3);
+        Theater.getInstance().addShowDate(shd3);
         Theater.getInstance().setMovieList(movies);
     }
 
