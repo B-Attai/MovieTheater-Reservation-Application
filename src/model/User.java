@@ -13,6 +13,7 @@ public class User {
         this.userName = userName;
         this.userPass = userPass;
         this.userType = userType;
+        //ADDED
     }
 
     public User(String username, String password) {
