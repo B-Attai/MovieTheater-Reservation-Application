@@ -99,8 +99,9 @@ public class Payment{
      * @throws Exception
      */
     public double performRefund(int bookingReference) throws Exception {
-
             for (Ticket ticket : ticketDB) {
+                System.out.println("for loop");
+                if (ticket==null) continue;
                 if (ticket.getBookingReference() == bookingReference) {
                     verifyTime(ticket);
                     Theater.getInstance().removeABooking(ticket);
@@ -114,7 +115,7 @@ public class Payment{
                 }
                 // Ticket does not exist
             }
-            throw new Exception("Ticket not found");
+            throw new IllegalCallerException("Ticket not found");
     }
 
     /**
