@@ -5,6 +5,9 @@ import model.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author Amir Abbaspour, Kayode Awe
+ */
 public class DBManager implements Credentials {
 
 	private Connection connection;
@@ -36,34 +39,6 @@ public class DBManager implements Credentials {
 		}
 	}
 
-
-    // Specific
-	public ResultSet selectMovies(int theatreID) {// Theater selection
-		try {
-			String query = "SELECT * FROM MOVIE WHERE TheatreID = ?";
-			statement = connection.prepareStatement(query);
-			statement.setInt(1, theatreID);
-			resultset = statement.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			while (resultset.next()) {
-				String row = "";
-				for (int i = 1; i <= resultset.getMetaData().getColumnCount(); i++) {
-					row += resultset.getString(i) + ", ";
-				}
-				System.out.println(row);
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-		return resultset;
-	}
 
 	//Search
 	public ArrayList<Movie> loadAllMovies() {
