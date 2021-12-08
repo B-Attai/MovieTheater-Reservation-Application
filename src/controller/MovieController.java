@@ -220,8 +220,18 @@ public class MovieController {
 			String date = showtimestring.split(" ")[0];
 			String time = showtimestring.split(" ")[1];
 			User user = currentUserController.getCurrentUser();
+			
+			String price;
+			// Check if user owns fees
+			if (user.isAnnualFee() == true) {
+				price = String.valueOf(theater.getTicketPrice() + 20);
+			}
+			else {
+				price = String.valueOf(theater.getTicketPrice());
+			}
+			
 			try {
-				nextview.populateTicket(user.getUserName(), "" + newTicket.getBookingReference(), view.getMovienameInput(), time + ":00", String.valueOf(theater.getTicketPrice()), date);
+				nextview.populateTicket(user.getUserName(), "" + newTicket.getBookingReference(), view.getMovienameInput(), time + ":00",price , date);
 			}catch (Exception ex){
 				ex.getMessage();
 				return;

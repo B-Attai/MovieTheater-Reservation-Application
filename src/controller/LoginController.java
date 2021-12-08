@@ -37,6 +37,13 @@ public class LoginController {
 				return;
 			}
 			
+			if(currentUser.getUserType().equals("Registered")) {
+				if( currentUser.isAnnualFee() == true) {
+					
+					JOptionPane.showMessageDialog(null, "You have not paid your membership fees, 20$ will be added to your receipt. For cancellation, please email customer service!", "Membership Fees" ,JOptionPane.PLAIN_MESSAGE);
+				}
+			}
+			
 			// Prompt News
 			JOptionPane.showMessageDialog(null,"Movie Update: Home Alone in Theaters on December 25!!", "Latest News for Registered User!",JOptionPane.PLAIN_MESSAGE);
 			

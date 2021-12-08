@@ -1,4 +1,4 @@
-package dataBase;
+package database;
 
 import model.*;
 
@@ -62,9 +62,11 @@ public class DataBase {
 
     private static ArrayList<User> loadUserDB(){
         ArrayList<User> users = new ArrayList<User>();
-
-        users.add(new RegisteredUser("Amir", "123"));
-        users.add(new RegisteredUser("1", "1"));
+        // If false, you paid
+        // if true, you need to pay
+        users.add(new RegisteredUser("Amir", "Amir", false));
+        users.add(new RegisteredUser("Michael", "Michael", true));
+        users.add(new RegisteredUser("1", "1", false));
         users.add(new User("1", "1"));
         return users;
     }

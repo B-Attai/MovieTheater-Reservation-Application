@@ -7,19 +7,22 @@ public class User {
     private String userName;
     private String userPass;
     private String userType;
+    private boolean annualFee;
 
     //Constructor for regular user
     public User(String userName, String userPass, String userType) {
         this.userName = userName;
         this.userPass = userPass;
         this.userType = userType;
+        
         //ADDED
     }
 
     public User(String username, String password) {
         this.userName = username;
         this.userPass = password;
-        userType = "guest";
+        this.userType = "guest";
+        this.setAnnualFee(false);
     }
 
     //Getters and setters
@@ -64,4 +67,12 @@ public class User {
                 ", userType='" + userType + '\'' +
                 '}';
     }
+
+	public boolean isAnnualFee() {
+		return annualFee;
+	}
+
+	public void setAnnualFee(boolean annualFee) {
+		this.annualFee = annualFee;
+	}
 }
