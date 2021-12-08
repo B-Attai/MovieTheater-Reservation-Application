@@ -42,8 +42,6 @@ public class MenuController {
 			ticketView.requestRefundButton.setVisible(true);
 			
 		});
-		
-		
 	}
 
 }

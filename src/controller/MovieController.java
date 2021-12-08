@@ -42,7 +42,7 @@ public class MovieController {
 			// Get 2 arguments Username, Passwowrd
 			String movie = view.getMovienameInput();
 			System.out.println(movie);
-			
+
 			// Backend logic stuffs.
 
 			// Create SQL Query or pass movie name to movie. Get a list of possible movies
