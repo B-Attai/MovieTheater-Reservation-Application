@@ -60,14 +60,14 @@ public class ShowTime {
      * Overridden toString method to build the showtime.
      * @return
      */
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        for (Integer i:showDateSchedule.keySet()){
-            result.append("\nShowTime: ").append(i);
-        }
-        return result.toString();
-    }
+//    @Override
+//    public String toString() {
+//        StringBuilder result = new StringBuilder();
+//        for (Integer i:showDateSchedule.keySet()){
+//            result.append("\nShowTime: ").append(i);
+//        }
+//        return result.toString();
+//    }
 
     /**
      * Method to return the showDate schedule.
@@ -75,5 +75,12 @@ public class ShowTime {
      */
     public HashMap<Integer, TheaterShowRooms> getShowDateSchedule() {
         return showDateSchedule;
+    }
+
+    @Override
+    public String toString() {
+        return "ShowTime{" +
+                "date='" + date + '\'' +
+                '}';
     }
 }

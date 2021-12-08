@@ -1,5 +1,7 @@
 package model;
 
+import database.DBManager;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +21,8 @@ public class Payment{
     private PaymentStrategy paymentStrategy;
     private UserRefundInterface refundStrategy;
     //Storage for Tickets generated to process refunds
-    private ArrayList<Ticket> ticketDB;
+    private ArrayList<Ticket> ticketArrayList;
+    DBManager myDB = new DBManager();
 
     /**
      * Get the only instance of the Payment system. This method enables the
@@ -29,8 +32,8 @@ public class Payment{
      */
     public static Payment getInstance(){
         if (paymentInstance ==null){
-            return new Payment(new CreditCardStrategy() {
-            });
+            paymentInstance = new Payment(new CreditCardStrategy());
+            return paymentInstance;
         }
         return paymentInstance;
     }
@@ -42,6 +45,7 @@ public class Payment{
      */
     private Payment(PaymentStrategy paymentStrategy) {
         setPaymentStrategy(paymentStrategy);
+        ticketArrayList = new ArrayList<>();
     }
 
     /**
@@ -61,13 +65,17 @@ public class Payment{
     public Ticket generateTicket(Movie movie, User user, int showroomNumber, int seatNumber, String date, int hour) {
         Ticket aTicket = new Ticket(movie, user, showroomNumber, seatNumber, date, hour);
         try {
-            if(movie.getAnnouncementDate().isEmpty() == false){
-                if (verifyEarlyPurchase(movie, aTicket, user) == true) {
+            if(!movie.getAnnouncementDate().isEmpty()){
+                if (verifyEarlyPurchase(movie, aTicket, user)) {
                 Theater.getInstance().makeBooking(aTicket);
+                ticketArrayList.add(aTicket);
+                myDB.addTicket(aTicket);
                 return aTicket;
             }
-            }else if(movie.getAnnouncementDate().isEmpty() == true){
+            }else if(movie.getAnnouncementDate().isEmpty()){
                 Theater.getInstance().makeBooking(aTicket);
+                ticketArrayList.add(aTicket);
+                myDB.addTicket(aTicket);
                 return aTicket;
             }else{
                 System.out.println("Couldn't book a ticket");
@@ -99,12 +107,13 @@ public class Payment{
      * @throws Exception
      */
     public double performRefund(int bookingReference) throws Exception {
-            for (Ticket ticket : ticketDB) {
+            for (Ticket ticket : ticketArrayList) {
                 if (ticket==null) continue;
                 if (ticket.getBookingReference() == bookingReference) {
                     verifyTime(ticket);
                     Theater.getInstance().removeABooking(ticket);
                     removeTicket(ticket.getBookingReference());
+                    myDB.removeTicket(ticket);
                     if (ticket.getUser().getUserType().equals("Registered")) {
                         setRefundStrategy(new RegisterUserRefund());
                     } else {
@@ -192,7 +201,7 @@ public class Payment{
      * @return Boolean - true if it can be removed else false
      */
     public boolean removeTicket(int bookingReference) {
-        Iterator<Ticket> itr = ticketDB.iterator();
+        Iterator<Ticket> itr = ticketArrayList.iterator();
         while (itr.hasNext()) {
             Ticket toRemove = itr.next();
             if (toRemove.getBookingReference() == bookingReference) {
@@ -223,9 +232,13 @@ public class Payment{
 
     /**
      * Set the ticket DB
-     * @param ticketDB The ticketDB to be set.
+     * @param ticketArrayList The ticketDB to be set.
      */
-    public void setTicketDB(ArrayList<Ticket> ticketDB) {
-        this.ticketDB = ticketDB;
+    public void setTicketArrayList(ArrayList<Ticket> ticketArrayList) {
+        this.ticketArrayList = ticketArrayList;
+    }
+
+    public ArrayList<Ticket> getTicketArrayList() {
+        return ticketArrayList;
     }
 }

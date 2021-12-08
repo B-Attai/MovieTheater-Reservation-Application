@@ -30,10 +30,10 @@ public class GUIApp {
 		
 		// Creating Controllers
 		LoginController logincontroller = new LoginController(loginWindow, menuWindow, theaterDatabase.getUsers());
-		TicketController ticketcontroller = new TicketController(ticketWindow, theaterDatabase.getTickets());
+		TicketController ticketcontroller = new TicketController(ticketWindow);
 		MovieController moviecontroller = new MovieController(movieWindow, ticketWindow, theaterDatabase.getMovies(), logincontroller, ticketcontroller, menuWindow);
 		MenuController menucontroller = new MenuController(loginWindow, menuWindow, movieWindow, ticketWindow);
-		RefundController refundcontroller = new RefundController(ticketWindow, theaterDatabase.getTickets());
+		RefundController refundcontroller = new RefundController(ticketWindow);
 
 		
 	}
