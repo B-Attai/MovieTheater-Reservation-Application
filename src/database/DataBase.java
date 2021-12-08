@@ -52,25 +52,6 @@ public class DataBase {
         return myDBM.loadAllUsers();
     }
 
-    /**
-     * Method to load the tickets into the DB.
-     * @return A list of tickets.
-     */
-//    private ArrayList<Ticket> loadTicketDB(){
-//        Payment payment = Payment.getInstance();
-//
-//        ArrayList<Ticket> tickets = new ArrayList<>();
-//
-//
-//        tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 1, "12-12-2021", 12));
-//        tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 3, "12-12-2021", 12));
-//        tickets.add(payment.generateTicket(movies.get(2), users.get(3), 1, 2, "12-12-2021", 12));
-//        tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "07-12-2021", 12));
-//        tickets.add(payment.generateTicket(movies.get(2), users.get(2), 1, 4, "07-12-2021", 12));
-//        tickets.add(payment.generateTicket(movies.get(1), users.get(2), 1, 1, "25-12-2021", 12));
-//        tickets.add(payment.generateTicket(movies.get(1), users.get(2), 1, 2, "25-12-2021", 12));
-//        return tickets;
-//    }
 
     /**
      * Method set up the theater and load in required objects to simulate the
