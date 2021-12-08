@@ -30,9 +30,6 @@ public class TicketController {
 
 		view.addPrintReceiptListener(e ->{ //Action Listener for the receipt button
 
-			System.out.println("Print Receipt pressed - This is lcoated in Ticket Controller!!");
-			
-			// Here you can do whateve you need about the ticket.
 			JOptionPane.showMessageDialog(null, ticket, "Receipt" ,JOptionPane.PLAIN_MESSAGE);
 
 		});

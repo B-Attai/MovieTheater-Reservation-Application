@@ -5,6 +5,12 @@ import view.Menu_UI;
 import view.Movie_UI;
 import view.Ticket_UI;
 
+/**
+ * MenuController to control the views of the system. Adds various actions to be
+ * performed at various stages of the UI interaction.
+ *
+ * @author Amir Abbaspour, Michael Ah-Kiow
+ */
 public class MenuController {
 	private Login_UI loginView;
 	private Menu_UI menuView;

@@ -75,11 +75,21 @@ public class User {
         return Objects.equals(userName, user.userName) && Objects.equals(userPass, user.userPass);
     }
 
+    /**
+     * Hash code of the object parameters
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(userName, userPass, userType);
     }
 
+    /**
+     * Overridden toString to represent the user as a
+     * string.
+     *
+     * @return String representing the user object.
+     */
     @Override
     public String toString() {
         return "User{" +
@@ -89,10 +99,19 @@ public class User {
                 '}';
     }
 
+    /**
+     * Method to determine if the user has an annual fee due.
+     * @return boolean - false if not required to pay, else true
+     */
 	public boolean isAnnualFee() {
 		return annualFee;
 	}
 
+    /**
+     * Method to set if the user is required to pay an annual
+     * fee.
+     * @param annualFee The boolean if the user has to pay a fee, i.e. true
+     */
 	public void setAnnualFee(boolean annualFee) {
 		this.annualFee = annualFee;
 	}

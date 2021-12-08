@@ -23,7 +23,6 @@ public class Showroom {
      */
     public void bookASeat(int seatNumber){
         seatList.get(seatNumber-1).bookSeat(); // -1 for the 0 index on the seatList
-        System.out.println("Seat " + seatNumber + " booked!");
     }
 
     /**
@@ -35,6 +34,16 @@ public class Showroom {
         System.out.println("Seat " + seatNumber + " unbooked!");
     }
 
+    /**
+     * Overriden toString method to represent the showroom as a string
+     * @return string of showroom object
+     */
+    @Override
+    public String toString() {
+        return "showroomNumber=" + showroomNumber;
+
+    }
+
     //Getters and Setters
     public int getShowroomNumber() {
         return showroomNumber;
@@ -42,13 +51,6 @@ public class Showroom {
 
     public void setShowroomNumber(int showroomNumber) {
         this.showroomNumber = showroomNumber;
-    }
-
-    //Overridden toString, can be formatted as required
-    @Override
-    public String toString() {
-        return "showroomNumber=" + showroomNumber;
-
     }
 
     public void setSeatList(ArrayList<Seat> seatList) {

@@ -3,10 +3,16 @@ package controller;
 import model.User;
 import view.Login_UI;
 import view.Menu_UI;
-
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * LoginController class that handles the login of the user. If a user logs in,
+ * it creates a registered user object, otherwise a regular user object. Error checking
+ * is also handled to confirm that only registered users are allowed to login.
+ *
+ * @author Amir Abbaspour, Michael Ah-Kiow
+ */
 public class LoginController {
 	Login_UI loginView;
 	Menu_UI menuView;
@@ -27,10 +33,9 @@ public class LoginController {
 			String username = loginView.getUsernameInput();
 			String password = loginView.getPasswordInput();
 			
-			// Backend logic stuffs.
+			//Create User session
 			User u = new User(username, password);
 			currentUser = checkUser(u);
-//			showAnnouncement(currentUser);
 
 			if (currentUser==null){
 				JOptionPane.showMessageDialog(null, "Username or password is invalid.\nPlease try again", "LoginError" ,JOptionPane.PLAIN_MESSAGE);
@@ -39,7 +44,6 @@ public class LoginController {
 			
 			if(currentUser.getUserType().equals("Registered")) {
 				if( currentUser.isAnnualFee() == true) {
-					
 					JOptionPane.showMessageDialog(null, "You have not paid your membership fees, 20$ will be added to your receipt. For cancellation, please email customer service!", "Membership Fees" ,JOptionPane.PLAIN_MESSAGE);
 				}
 			}
@@ -71,12 +75,6 @@ public class LoginController {
 		
 	}
 
-//	public void showAnnouncement(User user){
-//		if(user!= null)
-//			JOptionPane.showMessageDialog(null, "There is a new movie, you can purchase now!", "Announcement!" ,JOptionPane.PLAIN_MESSAGE);
-//	}
-
-
 	public void setUsersDB(ArrayList<User> usersDB) {
 		this.usersDB = usersDB;
 	}
@@ -85,10 +83,14 @@ public class LoginController {
 		return currentUser;
 	}
 
+	/**
+	 * Method to check that a user exists in the database.
+	 * @param user User object to be checked.
+	 * @return Returns the user object if it is found else null.
+	 */
 	private User checkUser(User user){
 		for (User u: usersDB){
 			if (u.equals(user)){
-
 				return u;
 			}
 		}

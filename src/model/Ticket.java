@@ -3,7 +3,9 @@ package model;
 import java.util.Objects;
 
 /**
- * Ticket object.
+ * Ticket class representing a ticket object. Contains data related to the real world
+ * entity of a ticket. This is used to display to the user and process refunds.
+ *
  * @author Amir Abbaspour , Brandon Attai
  */
 public class Ticket {

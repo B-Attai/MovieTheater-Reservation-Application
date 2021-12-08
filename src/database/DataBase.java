@@ -4,12 +4,20 @@ import model.*;
 
 import java.util.ArrayList;
 
+/**
+ * Class to reflect a database of the system. Has methods to create objects to populate
+ * the system with the required data to simulate interactions for demonstration purposes.
+ *  * @author Amir Abbaspour , Brandon Attai, Kayode Awe
+ */
 public class DataBase {
 
     private final ArrayList<Movie> movies;
     private final ArrayList<User> users;
     private final ArrayList<Ticket> tickets;
 
+    /**
+     * Database constructor to load the data once instantiated.
+     */
     public DataBase(){
         this.movies = loadFromMovieDB();
         setupTheater();
@@ -17,17 +25,23 @@ public class DataBase {
         this.tickets = loadTicketDB();
     }
 
-    //Temporary loading from DB
+    /**
+     * Method to load the movies into the DB.
+     * @return A list of the movies.
+     */
     private static ArrayList<Movie> loadFromMovieDB() {
 
         ArrayList<Movie> testMovieDB = new ArrayList<Movie>();
-
         testMovieDB.add(new Movie("John Wick 3", ""));
         testMovieDB.add(new Movie("Home Alone", "20-12-2021"));
         testMovieDB.add(new Movie("James Bond", ""));
         return testMovieDB;
     }
 
+    /**
+     * Method to load the showrooms  into the DB.
+     * @return A list of showrooms.
+     */
     private static ArrayList<Showroom> loadFromShowroomDB(){
         ArrayList<Showroom> testShowroomDB = new ArrayList<Showroom>();
 
@@ -37,7 +51,10 @@ public class DataBase {
         return testShowroomDB;
     }
 
-    //Temporary seat database
+    /**
+     * Method to load the seats into the DB.
+     * @return A list of seats.
+     */
     private static ArrayList<Seat> loadFromSeatDB(){
         ArrayList<Seat> testSeatDB = new ArrayList<Seat>();
 
@@ -60,6 +77,10 @@ public class DataBase {
         return testSeatDB;
     }
 
+    /**
+     * Method to load the users into the DB.
+     * @return A list of users.
+     */
     private static ArrayList<User> loadUserDB(){
         ArrayList<User> users = new ArrayList<User>();
         // If false, you paid
@@ -71,6 +92,10 @@ public class DataBase {
         return users;
     }
 
+    /**
+     * Method to load the tickets into the DB.
+     * @return A list of tickets.
+     */
     private ArrayList<Ticket> loadTicketDB(){
         Payment payment = Payment.getInstance();
 
@@ -87,8 +112,11 @@ public class DataBase {
         return tickets;
     }
 
+    /**
+     * Method set up the theater and load in required objects to simulate the
+     * theater system..
+     */
     private void setupTheater(){
-        System.out.println("setupTheater");
         TheaterShowRooms tshr1 = new TheaterShowRooms(12, loadFromShowroomDB());
         TheaterShowRooms tshr2 = new TheaterShowRooms(12, loadFromShowroomDB());
         TheaterShowRooms tshr3 = new TheaterShowRooms(12, loadFromShowroomDB());
@@ -118,6 +146,7 @@ public class DataBase {
         Theater.getInstance().setMovieList(movies);
     }
 
+    //Getters and Setters
     public ArrayList<Movie> getMovies() {
         return movies;
     }
