@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS THEATER;
 CREATE TABLE THEATER (
     day  varchar(45) not null,
     time  VARCHAR (45) NOT NULL,
-    roomNumberint int NOT NULL,
+    roomNumber int NOT NULL,
     seatNumber  int not null,
     seatState int not null
 );
