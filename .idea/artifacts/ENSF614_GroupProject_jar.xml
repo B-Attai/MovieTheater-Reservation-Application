@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ENSF614-GroupProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ENSF614_GroupProject_jar</output-path>
+    <root id="archive" name="ENSF614-GroupProject.jar">
+      <element id="module-output" name="ENSF614-GroupProject" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/mysql-connector-java-8.0.27.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
