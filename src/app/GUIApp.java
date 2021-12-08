@@ -1,12 +1,11 @@
 package app;
 
 import controller.*;
-import model.Movie;
+import database.DataBase;
 import view.Login_UI;
 import view.Menu_UI;
 import view.Movie_UI;
 import view.Ticket_UI;
-import dataBase.DataBase;
 
 public class GUIApp {
 	
