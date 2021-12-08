@@ -42,7 +42,7 @@ public class MovieController {
 			// Get 2 arguments Username, Passwowrd
 			String movie = view.getMovienameInput();
 			System.out.println(movie);
-			
+
 			// Backend logic stuffs.
 
 			// Create SQL Query or pass movie name to movie. Get a list of possible movies
@@ -220,8 +220,23 @@ public class MovieController {
 			String date = showtimestring.split(" ")[0];
 			String time = showtimestring.split(" ")[1];
 			User user = currentUserController.getCurrentUser();
-			nextview.populateTicket(user.getUserName(),  ""+newTicket.getBookingReference(), view.getMovienameInput(), time+":00", String.valueOf(theater.getTicketPrice()), date);
-			// Basically pass those from each model populateTicket(String name, String ticket, String moviename, String Showtime, String Cost, String Date) 
+			
+			String price;
+			// Check if user owns fees
+			if (user.isAnnualFee() == true) {
+				price = String.valueOf(theater.getTicketPrice() + 20);
+			}
+			else {
+				price = String.valueOf(theater.getTicketPrice());
+			}
+			
+			try {
+				nextview.populateTicket(user.getUserName(), "" + newTicket.getBookingReference(), view.getMovienameInput(), time + ":00",price , date);
+			}catch (Exception ex){
+				ex.getMessage();
+				return;
+			}
+			// Basically pass those from each model populateTicket(String name, String ticket, String moviename, String Showtime, String Cost, String Date)
 			nextview.printReceiptButton.setVisible(true);
 			nextview.setVisible(true);
 		});

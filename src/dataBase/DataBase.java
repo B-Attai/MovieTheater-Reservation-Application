@@ -1,4 +1,4 @@
-package dataBase;
+package database;
 
 import model.*;
 
@@ -23,7 +23,7 @@ public class DataBase {
         ArrayList<Movie> testMovieDB = new ArrayList<Movie>();
 
         testMovieDB.add(new Movie("John Wick 3", ""));
-        testMovieDB.add(new Movie("Home Alone", "30-12-2021"));
+        testMovieDB.add(new Movie("Home Alone", "20-12-2021"));
         testMovieDB.add(new Movie("James Bond", ""));
         return testMovieDB;
     }
@@ -62,9 +62,11 @@ public class DataBase {
 
     private static ArrayList<User> loadUserDB(){
         ArrayList<User> users = new ArrayList<User>();
-
-        users.add(new RegisteredUser("Amir", "123"));
-        users.add(new RegisteredUser("1", "1"));
+        // If false, you paid
+        // if true, you need to pay
+        users.add(new RegisteredUser("Amir", "Amir", false));
+        users.add(new RegisteredUser("Michael", "Michael", true));
+        users.add(new RegisteredUser("1", "1", false));
         users.add(new User("1", "1"));
         return users;
     }
@@ -80,6 +82,8 @@ public class DataBase {
         tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "12-12-2021", 12));
         tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "07-12-2021", 12));
         tickets.add(payment.generateTicket(movies.get(2), users.get(2), 1, 4, "07-12-2021", 12));
+        tickets.add(payment.generateTicket(movies.get(1), users.get(2), 1, 1, "25-12-2021", 12));
+        tickets.add(payment.generateTicket(movies.get(1), users.get(2), 1, 2, "25-12-2021", 12));
         return tickets;
     }
 
@@ -91,7 +95,7 @@ public class DataBase {
 
         ShowTime sh1 = new ShowTime("12-12-2021");
         ShowTime sh2 = new ShowTime("07-12-2021");
-        ShowTime sh3 = new ShowTime("08-12-2021");
+        ShowTime sh3 = new ShowTime("25-12-2021");
 
 
         sh1.addTimeSlot(tshr1);
@@ -105,7 +109,7 @@ public class DataBase {
         ShowDate shd2 = new ShowDate("07-12-2021");
         shd2.addShow("James Bond", sh2);
 
-        ShowDate shd3 = new ShowDate("08-12-2021");
+        ShowDate shd3 = new ShowDate("25-12-2021");
         shd3.addShow("Home Alone", sh3);
 
         Theater.getInstance().addShowDate(shd1);

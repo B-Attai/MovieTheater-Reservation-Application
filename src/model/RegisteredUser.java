@@ -11,9 +11,10 @@ public class RegisteredUser extends User{
      * @param userName The username of the user
      * @param password The password of the user
      */
-    public RegisteredUser(String userName, String password) {
+    public RegisteredUser(String userName, String password, boolean hasNotPaidFee) {
         super(userName, password);
         setUserType("Registered"); //Added to every registered user to determine type
+        setAnnualFee(hasNotPaidFee);
     }
 
     /**
@@ -25,4 +26,6 @@ public class RegisteredUser extends User{
     public boolean equals(Object o) {
         return super.equals(o);
     }
+
+    
 }
