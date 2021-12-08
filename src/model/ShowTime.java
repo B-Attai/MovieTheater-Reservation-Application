@@ -2,12 +2,21 @@ package model;
 
 import java.util.HashMap;
 
+/**
+ * The class that stores the showroom info with their show hour
+ * @author Amir Abbaspour, Brandon Attai
+ */
 public class ShowTime {
     // format"dd-MM-yy"
     private final String date;
     // Showroom and hour are stored
     private HashMap<Integer, TheaterShowRooms> showDateSchedule = new HashMap<>();
 
+    /**
+     * constructor
+     * @param date the date of the showtime
+     * @param showDateSchedule the schedule of the showroom during a day
+     */
     public ShowTime(String date, HashMap<Integer, TheaterShowRooms> showDateSchedule) {
         this.date = date;
         this.showDateSchedule = showDateSchedule;

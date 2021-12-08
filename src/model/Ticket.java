@@ -2,6 +2,10 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * Ticket object.
+ * @author Amir Abbaspour , Brandon Attai
+ */
 public class Ticket {
 
     private static int referenceNumber = 0;
@@ -14,7 +18,15 @@ public class Ticket {
     private final int showroomNumber;
     private final int seatNumber;
 
-    //Constructor
+    /**
+     * Constructor
+     * @param movie movie object for the ticket
+     * @param user user who bought the ticket
+     * @param showroomNumber number of the showroom
+     * @param seatNumber number of the seat
+     * @param date date of the show
+     * @param hour time of the show
+     */
     public Ticket(Movie movie, User user, int showroomNumber, int seatNumber, String date, int hour) {
         this.movie = movie;
         this.user = user;
@@ -26,6 +38,10 @@ public class Ticket {
         this.bookingReference = generateReferenceNumber();
     }
 
+    /**
+     * @param o the object to campare to
+     * @return true if the two tickets have the same booking reference
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,19 +55,16 @@ public class Ticket {
         return Objects.hash(bookingReference);
     }
 
-    //Overridden toString, can be modified to get the required format
-
     @Override
     public String toString() {
-        return "Ticket{" +
-                "user=" + user.getUserName() +
-                ", bookingReference=" + bookingReference +
-                ", movie=" + movie.getMovieName() +
-                ", date='" + date + '\'' +
-                ", hour='" + time + '\'' +
-                ", showroomNumber=" + showroomNumber +
-                ", seatNumber=" + seatNumber +
-                '}';
+        return "Ticket info:\n" +
+                "user: " + user.getUserName() +
+                ", bookingReference: " + bookingReference +
+                ", movie: " + movie.getMovieName() +
+                ", date: '" + date + '\'' +
+                ", hour: '" + time + '\'' +
+                ", showroomNumber: " + showroomNumber +
+                ", seatNumber: " + seatNumber;
     }
 
 

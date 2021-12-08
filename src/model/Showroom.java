@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Showroom object that stores the seats
+ * @author Amir Abbaspour, Brandon Attai
+ */
 public class Showroom {
 
     private ArrayList<Seat> seatList;
@@ -13,39 +17,19 @@ public class Showroom {
         this.seatList = seatList;
     }
 
-    //Temporary method to get the seat mapping formatted in a string
-//    public String getSeatList() {
-//        StringBuilder sb = new StringBuilder();
-//        StringBuilder sb2 = new StringBuilder();
-//        int counter = 0;
-//        for(int i = 0; i < sqrt(seatList.size()); i++){
-//            for (int j = 0; j < sqrt(seatList.size()); j++){
-//                sb.append(seatList.get(counter));
-//                counter++;
-//            }
-//            sb2.append("\n" + sb);
-//            sb.setLength(0);
-//        }
-//        return sb2.toString();
-//    }
-
-
-    //Always check seat state before setting a new seat state
-    public boolean getSeatState(int seatNumber){
-        if(seatList.get(seatNumber).getState() == 0){
-            return false;
-        }
-        else return true;
-    }
-
-    //Book a seat and change the seat state
+    /**
+     * Book a seat and change the seat state
+     * @param seatNumber the number of the seat that will be booked
+     */
     public void bookASeat(int seatNumber){
         seatList.get(seatNumber-1).bookSeat(); // -1 for the 0 index on the seatList
         System.out.println("Seat " + seatNumber + " booked!");
     }
 
-    //Unbook a seat and change the seat state
-    //TODO: Needs to be implemented in Payment/Theater
+    /**
+     * Unbook a seat and change the seat state
+     * @param seatNumber the number of the seat to un book
+     */
     public void unbookASeat(int seatNumber){
         seatList.get(seatNumber-1).unbookSeat(); // -1 for the 0 index on the seatList
         System.out.println("Seat " + seatNumber + " unbooked!");

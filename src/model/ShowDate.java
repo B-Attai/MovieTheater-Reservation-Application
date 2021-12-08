@@ -2,6 +2,9 @@ package model;
 
 import java.util.HashMap;
 
+/**
+ * A class that 
+ */
 public class ShowDate {
     // Stores movie to a show time
     private HashMap<String, ShowTime> dateMovieSchedule;

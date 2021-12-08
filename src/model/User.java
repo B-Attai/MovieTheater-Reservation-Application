@@ -2,6 +2,10 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * General users class.
+ * @author Amir Abbaspour , Brandon Attai
+ */
 public class User {
 
     private String userName;
@@ -9,6 +13,13 @@ public class User {
     private String userType;
 
     //Constructor for regular user
+
+    /**
+     * Constructor with all the params
+     * @param userName username of the user
+     * @param userPass password of the user
+     * @param userType type of the user ("guest" or "Registered")
+     */
     public User(String userName, String userPass, String userType) {
         this.userName = userName;
         this.userPass = userPass;
@@ -16,6 +27,11 @@ public class User {
         //ADDED
     }
 
+    /**
+     * Constructor for guest users only
+     * @param username username of the user
+     * @param password password of the user
+     */
     public User(String username, String password) {
         this.userName = username;
         this.userPass = password;
@@ -43,6 +59,11 @@ public class User {
         this.userType = userType;
     }
 
+    /**
+     * Two users are equal if their username and password are matched
+     * @param o the object to compare with "this" object
+     * @return tru if the two objects have the same username and pass
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
