@@ -8,16 +8,14 @@ public class Seat {
 
     private int state = 0; //Default state of the seat, 0 to represent empty
     private int seatNumber;
-    private int seatRow;
 
     /**
      * Constructor to craete a seat object.
      * @param seatNumber Seat Number in the showroom
-     * @param seatRow Seat Row in the showroom
      */
-    public Seat(int seatNumber, int seatRow) {
+    public Seat(int seatNumber, int seatState) {
         this.seatNumber = seatNumber;
-        this.seatRow = seatRow;
+        this.state = seatState;
     }
 
     /**
@@ -29,7 +27,6 @@ public class Seat {
         return "Seat{" +
                 "state=" + state +
                 ", seatNumber=" + seatNumber +
-                ", seatRow=" + seatRow +
                 '}';
     }
 
@@ -40,14 +37,6 @@ public class Seat {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
-    }
-
-    public long getSeatRow() {
-        return seatRow;
-    }
-
-    public void setSeatRow(int seatRow) {
-        this.seatRow = seatRow;
     }
 
     public int getState() {

@@ -113,14 +113,15 @@ VALUES
 
 DROP TABLE IF EXISTS MOVIES;
 CREATE TABLE MOVIES (
-    movieName  varchar(45) not null
+    movieName  varchar(45) not null,
+    announcementDate  varchar(45) not null
 );
 
-INSERT INTO MOVIES (movieName)
+INSERT INTO MOVIES (movieName, announcementDate)
 VALUES 
-('john Wick 3'),
-('Home Alone'),
-('James Bond');
+('john Wick 3', ''),
+('Home Alone', '20-12-2021'),
+('James Bond', '');
 
 
 DROP TABLE IF EXISTS USERS;

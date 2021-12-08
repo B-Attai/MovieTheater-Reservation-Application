@@ -15,11 +15,13 @@ public class DataBase {
     private final ArrayList<User> users;
     private final ArrayList<Ticket> tickets;
 
+    private static DBManager myDBM = new DBManager();
+
     /**
      * Database constructor to load the data once instantiated.
      */
     public DataBase(){
-        this.movies = loadFromMovieDB();
+        this.movies = myDBM.loadAllMovies();
         setupTheater();
         this.users = loadUserDB();
         this.tickets = loadTicketDB();
@@ -30,12 +32,7 @@ public class DataBase {
      * @return A list of the movies.
      */
     private static ArrayList<Movie> loadFromMovieDB() {
-
-        ArrayList<Movie> testMovieDB = new ArrayList<Movie>();
-        testMovieDB.add(new Movie("John Wick 3", ""));
-        testMovieDB.add(new Movie("Home Alone", "20-12-2021"));
-        testMovieDB.add(new Movie("James Bond", ""));
-        return testMovieDB;
+        return myDBM.loadAllMovies();
     }
 
     /**
@@ -82,14 +79,7 @@ public class DataBase {
      * @return A list of users.
      */
     private static ArrayList<User> loadUserDB(){
-        ArrayList<User> users = new ArrayList<User>();
-        // If false, you paid
-        // if true, you need to pay
-        users.add(new RegisteredUser("Amir", "Amir", false));
-        users.add(new RegisteredUser("Michael", "Michael", true));
-        users.add(new RegisteredUser("1", "1", false));
-        users.add(new User("2", "2"));
-        return users;
+        return myDBM.loadAllUsers();
     }
 
     /**
