@@ -100,7 +100,6 @@ public class Payment{
      */
     public double performRefund(int bookingReference) throws Exception {
             for (Ticket ticket : ticketDB) {
-                System.out.println("for loop");
                 if (ticket==null) continue;
                 if (ticket.getBookingReference() == bookingReference) {
                     verifyTime(ticket);
