@@ -5,7 +5,6 @@ import model.User;
 import view.Ticket_UI;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * TicketController class that handles the receipt. The receipt window is generated if
@@ -24,9 +23,8 @@ public class TicketController {
 	 * @param ticketwindow The ticket window view.
 	 * @param ticketDB The ticket database.
 	 */
-	public TicketController(Ticket_UI ticketwindow, ArrayList<Ticket> ticketDB) {
+	public TicketController(Ticket_UI ticketwindow) {
 		view = ticketwindow;
-		ticketDB = ticketDB;
 
 		view.addPrintReceiptListener(e ->{ //Action Listener for the receipt button
 

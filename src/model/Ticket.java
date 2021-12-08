@@ -38,6 +38,7 @@ public class Ticket {
         this.time = hour;
 
         this.bookingReference = generateReferenceNumber();
+        System.out.println(bookingReference);
     }
 
     /**

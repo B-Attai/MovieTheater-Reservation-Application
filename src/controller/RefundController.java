@@ -1,11 +1,9 @@
 package controller;
 
 import model.Payment;
-import model.Ticket;
 import view.Ticket_UI;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * Refund controller class to handle processing of the refund and displaying the refunded
@@ -21,13 +19,11 @@ public class RefundController {
 	 * refund button is pressed. If it is pressed, the ticket is obtained and the refund is processed.
 	 *
 	 * @param ticketwindow The ticket window that allows the user to input a ticket.
-	 * @param ticketDB The ticket db to query and remove a ticket.
 	 */
-	public RefundController(Ticket_UI ticketwindow, ArrayList<Ticket> ticketDB) {
+	public RefundController(Ticket_UI ticketwindow) {
 		view = ticketwindow; //Ticket window
 		view.addRequestListener(e ->{ //Action Listener
 			Payment instance = Payment.getInstance();
-			instance.setTicketDB(ticketDB);
 			int ticketRefNo = 0;
 			try { //Error handling for no input on ticket field
 				ticketRefNo = Integer.parseInt(view.getTicketID());
