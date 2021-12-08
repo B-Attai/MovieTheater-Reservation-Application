@@ -10,19 +10,19 @@ Group Members:
 ## Instructions
 
 ### Login
- * To login to the system, the following credentials can be used. 
+ #### To login to the system, the following credentials can be used. 
  - Username: Amir, Password: Amir (Paid annual registration fee)
  - Username: Michael, Password: Michael (Did not pay annual registration fee)
 
 ### Guest
-* Select the Continue as guest option.
+#### Select the Continue as guest option.
 
 ### Movie search
-* To search for a movie, the following movies are enabled in the database:
+#### To search for a movie, the following movies are enabled in the database:
 - James Bond 
 - Home Alone (Early announcement movie)
 
-* Process
+#### Process
 - Search for a movie by typing in a name as above. 
 - Once typed in search for the movie and confirm selection. 
 - Once on the select a showroom/seat page, select a show time. 
