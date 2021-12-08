@@ -67,7 +67,7 @@ public class DataBase {
         users.add(new RegisteredUser("Amir", "Amir", false));
         users.add(new RegisteredUser("Michael", "Michael", true));
         users.add(new RegisteredUser("1", "1", false));
-        users.add(new User("1", "1"));
+        users.add(new User("2", "2"));
         return users;
     }
 
@@ -79,7 +79,7 @@ public class DataBase {
 
         tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 1, "12-12-2021", 12));
         tickets.add(payment.generateTicket(movies.get(2), users.get(0), 1, 3, "12-12-2021", 12));
-        tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "12-12-2021", 12));
+        tickets.add(payment.generateTicket(movies.get(2), users.get(3), 1, 2, "12-12-2021", 12));
         tickets.add(payment.generateTicket(movies.get(2), users.get(1), 1, 2, "07-12-2021", 12));
         tickets.add(payment.generateTicket(movies.get(2), users.get(2), 1, 4, "07-12-2021", 12));
         tickets.add(payment.generateTicket(movies.get(1), users.get(2), 1, 1, "25-12-2021", 12));
