@@ -225,6 +225,7 @@ public class MovieController {
 			// Check if user owns fees
 			if (user.isAnnualFee() == true) {
 				price = String.valueOf(theater.getTicketPrice() + 20);
+				JOptionPane.showMessageDialog(null, "Reminder: Adding 20$ for membership fees!", "Membership Fees" ,JOptionPane.PLAIN_MESSAGE);
 			}
 			else {
 				price = String.valueOf(theater.getTicketPrice());

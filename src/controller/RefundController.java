@@ -31,14 +31,15 @@ public class RefundController {
 			int ticketRefNo = 0;
 			try { //Error handling for no input on ticket field
 				ticketRefNo = Integer.parseInt(view.getTicketID());
-			}catch (Exception ex){
+			}catch (Exception ex1){
 				JOptionPane.showMessageDialog(null, "No ticket entered. Please try again", "ERROR" ,JOptionPane.PLAIN_MESSAGE);
 			}
 			try {
 				double amountReturned = instance.performRefund(ticketRefNo);
 				JOptionPane.showMessageDialog(null, "Refund successful.\nAmount: " + amountReturned + '$', "Successful banking operation" ,JOptionPane.PLAIN_MESSAGE);
 			} catch (Exception ex) {
-				ex.getMessage();
+				JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR" ,JOptionPane.PLAIN_MESSAGE);
+
 			}
 		});
 	}
