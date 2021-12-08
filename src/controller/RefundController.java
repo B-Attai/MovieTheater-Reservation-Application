@@ -38,7 +38,7 @@ public class RefundController {
 				double amountReturned = instance.performRefund(ticketRefNo);
 				JOptionPane.showMessageDialog(null, "Refund successful.\nAmount: " + amountReturned + '$', "Successful banking operation" ,JOptionPane.PLAIN_MESSAGE);
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR" ,JOptionPane.PLAIN_MESSAGE);
+				ex.getMessage();
 			}
 		});
 	}
