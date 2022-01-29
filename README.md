@@ -1,11 +1,33 @@
 # ENSF614-GroupProject
 Group Project for ENSF 614
 
+Description: 
+This project makes use of system design principles to create a Movie Theater application that 
+allows various types of users to purchase movie tickets, request refunds, login and pay via simulated credit card payment system. 
+
+The project makes use of:
+ - Systems use case diagrams
+ - Systems activity diagrams
+ - State transition diagrams
+ - Detailed use cases for various scenarios
+ - System interaction diagrams
+ - Design level class specifications; Class Diagrams etc.
+ - Package diagram
+ - Deployment diagram
+
+Design strategies and techniques are implemented to make the architecture of the system more: reusable, scalable, maintainable, reliable, and using necessary concepts  such  as  modular  design,  inheritance,  realization,  aggregation,  composition, polymorphism, and appropriate design patterns as needed.
+
+Design Patterns:
+ - Stratey Pattern
+ - Singleton Pattern
+ 
+
+
 Group Members: 
-- Michael Ah-Kiow (30019892) 
-- Amir Abbaspour (30076398) 
-- Brandon Attai (30146080) 
-- Kayode Awe (30139223) 
+- Michael Ah-Kiow 
+- Amir Abbaspour  
+- Brandon Attai 
+- Kayode Awe 
 
 ## Instructions
 
